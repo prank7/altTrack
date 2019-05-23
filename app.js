@@ -9,7 +9,7 @@ const path = require("path");
 const port = 8000;
 
 mongoose.connect(
- "mongodb://localhost/writer",
+ "mongodb://localhost/altTrack",
  { useNewUrlParser: true },
  function(err, connection) {
   if (err) throw err;
@@ -27,10 +27,10 @@ app.set("view engine", "ejs");
 
 app.use(
  session({
-  secret: "writer",
+  secret: "1stfullStackaltTrack",
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ url: "mongodb://localhost/writer-session" })
+  store: new MongoStore({ url: "mongodb://localhost/altTrack" })
  })
 );
 
@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(cors());
 
 app.use("/api", require("./server/routes/api"));
-app.use(require("./server/routes/index"));
+app.use("/users", require("./server/routes/user"));
 
 app.listen(port, () => {
  console.log(`server is running on http://localhost:${port}`);
