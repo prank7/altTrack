@@ -1,7 +1,50 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
+
+const API = 'http://localhost:8000/api/v1';
 
 class Register extends React.Component {
+	constructor() {
+		super();
+
+		this.state = {
+			name: '',
+			email: '',
+			password: '',
+		}
+	}
+
+	handleSubmit =(e)=> {
+		e.preventDefault();
+		let data = this.state
+		console.log(data,"brfore fetch")
+		fetch(`${API}/register`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data)
+		})
+		.then(res => res.json())
+		.then(data => {
+			console.log(data);
+			if(data.success){
+				this.props.history.push('/users/login')
+			}
+		});
+		// console.log('form submission data', data);
+	}
+
+	handleChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value,
+		})
+	}
+
+	componentDidMount() {
+	
+	}
+
 	render() {
 		return(
 			<>
@@ -10,10 +53,10 @@ class Register extends React.Component {
 						<h3 className="form-header">Sign up for an account</h3>
 					</div>
 					<div className="form-container">
-						<form className="form" action="/users/register" method="POST">
-							<input autofocus required type="text" name="name" placeholder="Enter your name" />
-							<input required type="text" name="email" placeholder="Enter your email" />
-							<input required type="password" name="password" placeholder="Enter  password" />
+						<form className="form" onSubmit={(e)=>this.handleSubmit(e)}>
+							<input value={this.state.name} onChange={(e) => this.handleChange(e)} autofocus required type="text" name="name" placeholder="Enter your name" />
+							<input value={this.state.email} onChange={(e) => this.handleChange(e)} required type="text" name="email" placeholder="Enter your email" />
+							<input value={this.state.password} onChange={(e) => this.handleChange(e)} required type="password" name="password" placeholder="Enter password" />
 							<button type="submit">Sign Up</button>
 						</form>
 					</div>
@@ -27,4 +70,4 @@ class Register extends React.Component {
 	}
 }
 
-export default Register;
+export default (Register);
