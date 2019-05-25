@@ -195,18 +195,26 @@ h6 {
 }
 .heading__background--1{
   background-color: cadetblue;
-  width: 50%;
-  float: left;
-  height: 100%;
+	width: 50%;
+	float: left;
+  height: 99.9vh;
 }
 .heading__background--2{
-  transform: translateY(100%);
   float: right;
-  width: 49%;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+}
+.heading__homepage--2{
+	display: inline-block;
+  vertical-align: middle;
+  line-height: 14;
 }
 
-
-
+.form__signup,
+.form__login{
+	transform: translate(10%,-50%);
+}
 
 
 
