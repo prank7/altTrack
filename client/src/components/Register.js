@@ -48,23 +48,27 @@ class Register extends React.Component {
 	render() {
 		return(
 			<>
-				<section>
-					<div>
-						<h3 className="form-header">Sign up for an account</h3>
+				<div>
+					<form className="form__signup ui form" onSubmit={(e)=>this.handleSubmit(e)}>
+					<div className="field">
+					<label>username:</label>
+					<input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name"/><br/>
 					</div>
-					<div className="form-container">
-						<form className="form" onSubmit={(e)=>this.handleSubmit(e)}>
-							<input value={this.state.name} onChange={(e) => this.handleChange(e)} autofocus required type="text" name="name" placeholder="Enter your name" />
-							<input value={this.state.email} onChange={(e) => this.handleChange(e)} required type="text" name="email" placeholder="Enter your email" />
-							<input value={this.state.password} onChange={(e) => this.handleChange(e)} required type="password" name="password" placeholder="Enter password" />
-							<button type="submit">Sign Up</button>
-						</form>
+					<div className="field">
+					<label>email:</label>
+						<input value={this.state.email} onChange={(e) => this.handleChange(e)} type="email" name="email" /><br/><br/>
 					</div>
+					<div className="field">
+					<label>password:</label>
+						<input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/><br/><br/>
+					</div>
+					<button type="submit ui button">Signup</button>
+					</form>
 					<div>
 						<p>Already have an account?</p>
 						<Link to='/users/login'>Sign in</Link>
 					</div>
-				</section>
+				</div>
 			</>
 		)
 	}

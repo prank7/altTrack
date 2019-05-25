@@ -3,10 +3,6 @@ const router = express.Router();
 
 var userController = require('../controllers/userController');
 
-router.get('/', (err, res) => {
-  res.render('index');
-});
-
 //render register page
 router.get('/register', (err, res) => {
 	res.render('index');
