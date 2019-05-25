@@ -6,7 +6,10 @@ exports.loginUser = (req, res, next) => {
 	console.log(req.body, 'this is body');
 	User.findOne({email: req.body.email}, (err, user) => {
 		console.log(err, user, 'this is freaking user found in DB');
-		if(err) return  res.status(500).redirect('/users/login');
+		if(err) return  res.status(500).json({
+			success: false,
+			message: 'encountered error',
+		});
 		if(!user) return res.status(400).send('User NOT found. Please try again!');
 
 		user.comparePassword(req.body.password, (err, isMatch) => {
@@ -54,7 +57,7 @@ exports.registerUser = (req, res, next) => {
 				if(!err) return res.json({
 					success:true,
 				});
-				console.log(user);
+				console.log(user, 'registered user');
 			});
 		}
 	})
