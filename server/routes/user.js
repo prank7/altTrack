@@ -13,6 +13,9 @@ router.get('/login', (err, res) => {
 	res.render('index');
 });
 
+router.get('/org', (err, res) => {
+	res.render('index');
+});
 
 module.exports = router;
 	

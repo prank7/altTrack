@@ -50,24 +50,20 @@ class Register extends React.Component {
 			<>
 				<div>
 					<form className="form__signup ui form" onSubmit={(e)=>this.handleSubmit(e)}>
-					<div className="field">
+					<div className="five wide field">
 					<label>username:</label>
 					<input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name"/><br/>
 					</div>
-					<div className="field">
+					<div className="five wide field">
 					<label>email:</label>
 						<input value={this.state.email} onChange={(e) => this.handleChange(e)} type="email" name="email" /><br/><br/>
 					</div>
-					<div className="field">
+					<div className="five wide field">
 					<label>password:</label>
 						<input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/><br/><br/>
 					</div>
-					<button type="submit ui button">Signup</button>
+					<button className="ui button" type="submit">Signup</button>
 					</form>
-					<div>
-						<p>Already have an account?</p>
-						<Link to='/users/login'>Sign in</Link>
-					</div>
 				</div>
 			</>
 		)
