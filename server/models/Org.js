@@ -11,9 +11,14 @@ var orgSchema = new Schema({
 	imageUrl: {
 		type: String,
 	},
-	gitHub: {
-		
-	}
+	github: {
+		name: {
+			type: String,
+		},
+		photo: {
+			type: String,
+		},
+	},
 })
 
 var Org = mongoose.model('Org', orgSchema);

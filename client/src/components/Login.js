@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 const API = 'http://localhost:8000/api/v1';
 
 class Login extends React.Component {
-	constructor() {
-		super();
-
+	constructor(props) {
+		super(props);
 		this.state = {
 			email: '',
 			password: '',
@@ -27,9 +26,8 @@ class Login extends React.Component {
 		.then(res => res.json())
 		.then(data => {
 			console.log(data);
-			if(data.success) {
-				this.props.history.push('/')
-			}
+				this.props.getToken(data.token);
+				localStorage.setItem('AltTrack',data.token)
 		});
 	}
 
