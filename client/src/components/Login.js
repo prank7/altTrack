@@ -6,9 +6,8 @@ import { loginAction } from '../store/actions/Action';
 const API = 'http://localhost:8000/api/v1';
 
 class Login extends React.Component {
-	constructor() {
-		super();
-
+	constructor(props) {
+		super(props);
 		this.state = {
 			email: '',
 			password: '',

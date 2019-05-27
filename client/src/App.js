@@ -3,14 +3,30 @@ import './App.scss';
 import Login from './components/Login';
 import Register from './components/Register';
 import rocketship from "./rocketship.svg";
+import Org from './components/Org';
 import {
   BrowserRouter as Router,
-  Route, Switch
+  Route, Switch,withRouter
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import Organization from './components/Organization';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      token: localStorage.getItem('AltTrack') || null
+    }
+  }
+  
+  getToken= (token) =>{
+    console.log(token, "token in app.js")
+    this.setState({token},()=>{
+      this.props.history.push('/users/org');
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -33,9 +49,8 @@ class App extends Component {
           <Route exact path="/users/org" component={Organization}/>
         </Switch>
       </div>
-    </Router>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

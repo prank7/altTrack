@@ -3,9 +3,9 @@ var jwt = require('jsonwebtoken');
 
 
 exports.loginUser = (req, res, next) => {
-	console.log(req.body, 'this is body');
+	// console.log(req.body, 'this is body');
 	User.findOne({email: req.body.email}, (err, user) => {
-		console.log(err, user, 'this is freaking user found in DB');
+		// console.log(err, user, 'this is freaking user found in DB');
 		if(err) return  res.status(500).json({
 			success: false,
 			message: 'encountered error',
@@ -13,10 +13,10 @@ exports.loginUser = (req, res, next) => {
 		if(!user) return res.status(400).send('User NOT found. Please try again!');
 
 		user.comparePassword(req.body.password, (err, isMatch) => {
-			console.log(err, isMatch);
+			// console.log(err, isMatch);
 			if(err) return res.status(500).next(err);
 			if(!isMatch) return res.status(400).send('Incorrect Password. Please try again!');
-			console.log(user, 'this is user within ComparePassword');
+			// console.log(user, 'this is user within ComparePassword');
 			const token = jwt.sign({
 				email: user.email,
 				userId: user._id,
@@ -27,18 +27,17 @@ exports.loginUser = (req, res, next) => {
 			}
 			);
 
-			console.log('login success');
+			// console.log('login success');
 			return res.status(200).json({
 				message: 'Auth successfull',
 				token: token
 			});
-			// res.redirect('/');
 		});
 	});
 }
 
 exports.registerUser = (req, res, next) => {
-	console.log(req.body, 'this is body in registerUser');
+	// console.log(req.body, 'this is body in registerUser');
 	User.findOne({email: req.body.email})
 	.exec()
 	.then(user => {
