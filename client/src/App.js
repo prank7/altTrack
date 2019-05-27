@@ -3,36 +3,24 @@ import './App.scss';
 import Login from './components/Login';
 import Register from './components/Register';
 import rocketship from "./rocketship.svg";
-import Org from './components/Org';
 import {
   BrowserRouter as Router,
-  Route, Switch,withRouter
+  Route, Switch
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import Organization from './components/Organization';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-      token: localStorage.getItem('AltTrack') || null
-    }
-  }
-  
-  getToken= (token) =>{
-    console.log(token, "token in app.js")
-    this.setState({token},()=>{
-      this.props.history.push('/users/org');
-    })
-  }
 
   render() {
     return (
-      <Router>
+    <Router>
       <div className="App">
         <div className="heading__background--1">
-          <h1 className="heading__homepage--1">altify</h1>
+          <Link to="/"><h1 className="heading__homepage--1">altify</h1></Link>
+          
           <Nav/>
           <img src={rocketship} style={{width: "50%", margin: "4rem 0 0 9rem"}}/>
         </div>
@@ -49,8 +37,9 @@ class App extends Component {
           <Route exact path="/users/org" component={Organization}/>
         </Switch>
       </div>
+    </Router>
     );
   }
 }
 
-export default withRouter(App);
+export default App;
