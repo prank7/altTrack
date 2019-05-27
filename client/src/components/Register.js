@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link,withRouter } from "react-router-dom";
+// import { Link,withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { registerAction } from '../store/actions/Action';
 
 const API = 'http://localhost:8000/api/v1';
 
@@ -16,33 +18,15 @@ class Register extends React.Component {
 
 	handleSubmit =(e)=> {
 		e.preventDefault();
-		let data = this.state
-		console.log(data,"brfore fetch")
-		fetch(`${API}/register`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data)
-		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data);
-			if(data.success){
-				this.props.history.push('/users/login')
-			}
-		});
-		// console.log('form submission data', data);
+		this.props.dispatch(registerAction(this.state));
+
 	}
 
 	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value,
 		})
-	}
-
-	componentDidMount() {
-	
+		this.props.history.push('/login');
 	}
 
 	render() {
@@ -70,4 +54,10 @@ class Register extends React.Component {
 	}
 }
 
-export default (Register);
+const mapStateToProps = (state) => {
+	return {
+		userData : state.data
+	}
+}
+
+export default connect(mapStateToProps)(Register);

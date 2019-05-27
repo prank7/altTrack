@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { loginAction } from '../store/actions/Action';
 
 const API = 'http://localhost:8000/api/v1';
 
@@ -15,22 +17,8 @@ class Login extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		let data = this.state;
-		console.log(data, 'before fetch in Login');
-		fetch(`${API}/users/login`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data)
-		})
-		.then(res => res.json())
-		.then(data => {
-			console.log(data);
-			if(data.success) {
-				this.props.history.push('/')
-			}
-		});
+		this.props.dispatch(loginAction(this.state));
+		this.props.token ? this.props.history.push("/users/org") : this.props.history.push('/users/register');
 	}
 
 	handleChange = (e) => {
@@ -59,7 +47,13 @@ class Login extends React.Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		token : state.token
+	}
+}
 
-export default Login;
+
+export default connect(mapStateToProps)(Login);
 
 
