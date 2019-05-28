@@ -7,6 +7,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const port = 8000;
+const cookieParser = require('cookie-parser');
+const withAuth = require('./server/middleware');
+
+
 
 mongoose.connect(
  "mongodb://localhost/altTrack",
@@ -33,6 +37,13 @@ app.use(
   store: new MongoStore({ url: "mongodb://localhost/altTrack" })
  })
 );
+
+app.use(cookieParser());
+// app.get('/api/secret', withAuth, function(req, res) {
+//   res.send('The password is potato');
+// });
+
+
 
 if (process.env.NODE_ENV === "development") {
  var webpack = require("webpack");

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const withAuth = require('../middleware');
+
 
 var userController = require('../controllers/userController');
 
@@ -13,7 +15,7 @@ router.get('/login', (err, res) => {
 	res.render('index');
 });
 
-router.get('/org', (err, res) => {
+router.get('/org', withAuth, (err, res) => {
 	res.render('index');
 });
 

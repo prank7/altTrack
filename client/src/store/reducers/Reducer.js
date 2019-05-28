@@ -1,15 +1,17 @@
 const initState = {
   userData : {},
-  token: ""
+  token: '',
 };
 
+console.log('this is', initState);
 
-export default function rootReducer(state = initState,action){
+export default function rootReducer(state = initState,action) {
   switch(action.type){
     case "SIGNUP_SUCESS":{
       return state;
     }
     case "LOGIN_SUCESS":{
+      console.log('this is', initState);
       return {
         ...state,
         userData : action.data,

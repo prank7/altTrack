@@ -9,8 +9,9 @@ var orgSchema = new Schema({
 		maxLength: 16,
 		lowercase: true,
 	},
-	creator: {
-		type: String,
+	creator: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'User',
 	},
 	imageUrl: {
 		type: String,
