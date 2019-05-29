@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 
 exports.createOrg = (req, res, next) => {
-	console.log(req.body, 'this is ORG body received in req');
+	console.log(req.file, req.body, 'this is ORG body received in req');
 
 	upload(req, res, function (err) {
 		if (err instanceof multer.MulterError) {
@@ -25,31 +25,33 @@ exports.createOrg = (req, res, next) => {
 		} else if (err) {
 			return res.status(500).json(err)
 		}
-		console.log(req.file);
-		// return res.status(200).send(req.file)
-
+		console.log(req.body, req.file, 'Printing this value inside the funciton')
 		Org.findOne({ name: req.body.name })
-			.exec()
-			.then(foundOrg => {
-				if (foundOrg) {
-					return res.status(409).json({
-						success: false,
-						message: 'Name taken. Please use another name.'
-					});
-				} else {
+		.exec()
+		.then(foundOrg => {
+			console.log(foundOrg, 'Printing the finding status')
+			if (foundOrg) {
+				return res.status(409).json({
+					success: false,
+					message: 'Name taken. Please use another name.'
+				});
+			} else {
+				// console.log('Here in the else condition')
 					var newOrg = {
 						name: req.body.name,
 						creator: req.body.creator,
 						imageUrl: req.file.filename,
 						location: req.body.location,
 					}
+					console.log(newOrg, 'Printing the org information')
 					Org.create(newOrg, (err, createdOrg) => {
 						if (!err) return res.json({
 							success: true,
 						});
-						console.log(createdOrg, 'this is createdOrg');
+						console.log(createdOrg, err, 'this is createdOrg');
 					});
 				}
 			});
+			// return res.status(200).send(req.file)
 	})
 }
