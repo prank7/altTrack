@@ -6,7 +6,7 @@ const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const port = 8000;
+const port = process.env.PORT || 8000;
 const cookieParser = require('cookie-parser');
 const withAuth = require('./server/middleware');
 
@@ -67,7 +67,7 @@ app.use(cors());
 
 app.use("/api/v1", require("./server/routes/api/api"));
 app.use("/users", require("./server/routes/user"));
-app.use(require('./server/routes/index'))
+app.use(require('./server/routes/index'));
 
 app.listen(port, () => {
  console.log(`server is running on http://localhost:${port}`);

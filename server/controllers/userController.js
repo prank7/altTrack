@@ -33,6 +33,7 @@ exports.loginUser = (req, res, next) => {
 				token: token,
 				email: user.email,
 				name: user.name,
+				userId: user._id,
 			});
 		});
 	});
