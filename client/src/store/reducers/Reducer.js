@@ -1,9 +1,10 @@
 const initState = {
   userData : {},
-  token: '',
+  token: localStorage.getItem('token')
 };
 
 console.log('this is', initState);
+
 
 export default function rootReducer(state = initState,action) {
   switch(action.type){
@@ -15,7 +16,7 @@ export default function rootReducer(state = initState,action) {
       return {
         ...state,
         userData : action.data,
-        token: action.data.token
+        token: localStorage.setItem('token',action.data.token)
       }
     }
   default:

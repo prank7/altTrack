@@ -211,11 +211,28 @@ h6 {
   line-height: 14;
 }
 
-// .form__signup,
-// .form__login,
-// .form_create{
-// 	transform: translate(10%,-50%);
-// }
+.register{
+	background: yellowgreen;
+}
 
+.login{
+	background: cornflowerblue;
+}
 
+.form__signup,
+.form__login{
+	position: relative;
+	top: 0;
+	left:0;
+	transform: translate(0%,30%);
+	margin: 0 auto;
+	padding: 1rem;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 5px;
+	width: 50%;
+	box-shadow: 2px 3px 15px rgba(0,0,0,.3),-2px -3px 15px rgba(0,0,0,.3);
+}
 
+.form__login{
+	transform: translate(0%,40%);
+}

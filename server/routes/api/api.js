@@ -11,6 +11,6 @@ router.post('/users/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 
 //CreateOrg page submit
-router.post('/users/org', orgController.createOrg)
+router.post('/users/org',orgController.createOrg);
 
 module.exports =router;

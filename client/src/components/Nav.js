@@ -3,13 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Nav extends React.Component {
+
+  handleClick = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    this.props.history.push('/');
+  }
+
+
   render () {
     if(this.props.token){
       return (
       <div>
         <ul className="main__nav">
           <li className="main__navlist--item1">
+            <Link to="/" className="nav__links">Home</Link>
             <Link to="/users/org" className="nav__links">Create</Link>
+            <button className="ui button" onClick={this.handleClick}>logout</button>
           </li>
         </ul>
       </div>

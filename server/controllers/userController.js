@@ -26,7 +26,6 @@ exports.loginUser = (req, res, next) => {
 				expiresIn: "1h"
 			}
 			);
-			// localStorage.setItem('token', token)
 
 			console.log('login success');
 			return res.status(200).json({

@@ -15,7 +15,7 @@ router.get('/login', (err, res) => {
 	res.render('index');
 });
 
-router.get('/org', withAuth, (err, res) => {
+router.get('/org', withAuth ,(err, res) => {
 	res.render('index');
 });
 
