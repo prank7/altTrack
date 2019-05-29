@@ -7,19 +7,19 @@ var orgSchema = new Schema({
 		required: true,
 		minLength: 4,
 		maxLength: 16,
+		lowercase: true,
+	},
+	creator: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'User',
 	},
 	imageUrl: {
 		type: String,
 	},
-	github: {
-		name: {
-			type: String,
-		},
-		photo: {
-			type: String,
-		},
-	},
-})
+	location: {
+		type: String,
+	}
+}, {timestamps: true})
 
 var Org = mongoose.model('Org', orgSchema);
 

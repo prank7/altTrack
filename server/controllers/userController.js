@@ -26,11 +26,14 @@ exports.loginUser = (req, res, next) => {
 				expiresIn: "1h"
 			}
 			);
+			// localStorage.setItem('token', token)
 
-			// console.log('login success');
+			console.log('login success');
 			return res.status(200).json({
 				message: 'Auth successfull',
-				token: token
+				token: token,
+				email: user.email,
+				name: user.name,
 			});
 		});
 	});
@@ -54,10 +57,10 @@ exports.registerUser = (req, res, next) => {
 			}
 			User.create(newUser, (err, user) => {
 				if(!err) return res.json({
-					success:true,
+					success: true,
 				});
 				console.log(user, 'registered user');
 			});
 		}
-	})
+	});
 }
