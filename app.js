@@ -34,6 +34,9 @@ app.use(
   secret: "1stfullStackaltTrack",
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    maxAge : 90000000
+  },
   store: new MongoStore({ url: "mongodb://localhost/altTrack" })
  })
 );

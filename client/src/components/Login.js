@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { loginAction } from '../store/actions/Action';
+import Nav from './Nav';
 
 const API = 'http://localhost:8000/api/v1';
 
@@ -29,19 +30,22 @@ class Login extends React.Component {
 	render() {
 		return (
 			<>
-				<form className="form__login ui form" onSubmit={(e) => this.handleSubmit(e)}>
-				<div className="five wide field">
-					<label>email</label>
-					<input value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email'></input>
+				<Nav/>
+				<div className="login">
+					<form className="form__login ui form" onSubmit={(e) => this.handleSubmit(e)}>
+						<div className="field">
+							<label>email</label>
+							<input value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email'></input>
+						</div>
+							
+						<div className="field">
+							<label>password</label>
+							<input value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' placeholder='password'></input>
+						</div>
+						
+						<button className="ui button" type='submit'>Log in</button>
+					</form>
 				</div>
-					
-				<div className="five wide field">
-					<label>password</label>
-					<input value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' placeholder='password'></input>
-				</div>
-					
-					<button className="ui button" type='submit'>Log in</button>
-				</form>
 			</>
 		)
 	}
