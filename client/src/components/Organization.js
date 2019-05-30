@@ -6,9 +6,9 @@ import axios from 'axios';
   constructor(props) {
     super(props);
       this.state = {
-        selectedFile: null
+        selectedFile: null,
+        orgName: '',
       }
-   
   }
   
   onChangeHandler= (e) =>{
@@ -18,13 +18,24 @@ import axios from 'axios';
     })
   }
 
+  changeOrgName = (e) => {
+    this.setState({
+      orgName: e.target.value
+    })
+  }
+
   onClickHandler = (e) => {
+    console.log('Comming in here')
     e.preventDefault();
     const data = new FormData()
     data.append('file', this.state.selectedFile)
-    axios.post("http://localhost:8000/api/v1/users/org", data, { 
+    data.append('name', this.state.orgName)
+    console.log(data, this.state.orgName, this.state.selectedFile);
+
+    axios.post("http://localhost:3001/api/v1/users/org", data, { 
        // receive two    parameter endpoint url ,form data
-   })
+      headers: { 'Content-Type': 'multipart/form-data'}
+    })
    .then(res => { // then print response status
     console.log(res.statusText)
   })
@@ -36,7 +47,7 @@ import axios from 'axios';
         <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui form form_create">
           <div className="five wide field">
             <label>Create Organization</label>
-            <input type="text"/>
+            <input type="text" value={this.state.orgName} onChange={this.changeOrgName} />
           </div>
           <div className="five wide field">
             <label>upload image</label>
