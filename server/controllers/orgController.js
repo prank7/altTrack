@@ -1,26 +1,10 @@
 var Org = require('../models/Org');
-var multer = require('multer');
-var path = require('path');
-var uploadPath = path.join(__dirname, '..', 'public/uploads');
-
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, uploadPath)
-	},
-	filename: function (req, file, cb) {
-		//ensure the fileName is not repeated. So, added Date.now()
-		cb(null, Date.now() + '-' + file.originalname)
-		// console.log(file, 'this is inside fileName under Storage');
-	}
-})
-
-var upload = multer({ storage: storage }).single('file');
 
 exports.createOrg = (req, res, next) => {
 	Org.findOne({ name: req.body.name })
 	.exec()
 	.then(foundOrg => {
-		console.log(foundOrg, 'Printing the finding status')
+		console.log(foundOrg, 'This user already exists in DB.')
 		if (foundOrg) {
 			return res.status(409).json({
 				success: false,
@@ -31,15 +15,27 @@ exports.createOrg = (req, res, next) => {
 				var newOrg = {
 					name: req.body.name,
 					creator: req.body.creator,
-					imageUrl: req.file.filename,
+					imageUrl: req.file,
 					location: req.body.location,
 				}
 				console.log(newOrg, 'Printing the org information')
 				Org.create(newOrg, (err, createdOrg) => {
-					if (!err) return res.json({
-						success: true,
-					});
+					// if (!err) return res.json({
+					// 	success: true,
+					// });
 					console.log(createdOrg, err, 'this is createdOrg');
+					if(!err) {
+						Org.find({creator: req.body.creator})
+						.populate('creator')
+						.exec()
+						.then(foundOrgs => {
+							console.log(foundOrgs, 'All orgs created by logged in User');
+							if(foundOrgs) return res.status(200).json({
+								success: true,
+								foundOrgs
+							})
+						})
+					}
 				});
 			}
 		});
