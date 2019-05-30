@@ -1,27 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Nav extends React.Component {
 
   handleClick = (e) => {
-    e.preventDefault();
     localStorage.removeItem('token');
+    window.location.reload(); 
+    <Redirect to="/"/>
   }
 
 
   render () {
+    console.log(this.props.userData);
     if(this.props.token){
       return (
-      <div>
-        <ul className="main__nav">
-          <li className="main__navlist--item1">
-            <Link to="/" className="nav__links">Home</Link>
-            <Link to="/users/org" className="nav__links">Create</Link>
-            <button className="ui button" onClick={this.handleClick}>logout</button>
-          </li>
-        </ul>
-      </div>
+        <div>
+          <ul className="main__nav">
+            <li className="main__navlist--item1">
+              <Link to="/" className="nav__links">Home</Link>
+              <Link to="/users/org" className="nav__links">Create</Link>
+              <button className="ui button" onClick={this.handleClick}>logout</button>
+            </li>
+            <li>
+              {/* {this.props.userData} */}
+            </li>
+          </ul>
+        </div>
     )
   }else {
     return (
@@ -33,6 +38,9 @@ class Nav extends React.Component {
           <li className="main__navlist--item2">
             <Link to="/users/register" className="nav__links">Register</Link>
           </li>
+          <li>
+          <Link to="/" className="nav__links">Home</Link>
+          </li>
         </ul>
       </div>
     )
@@ -42,7 +50,8 @@ class Nav extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    token : state.token
+    token : state.token,
+    userData: state.userData
   }
 }
 

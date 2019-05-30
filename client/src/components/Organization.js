@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
+import { connect } from 'react-redux';
+// import { createOrg } from '../store/actions/Action';
 
  class Organization extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ import axios from 'axios';
   }
   
   onChangeHandler= (e) =>{
-    console.log(e.target.files[0]);
     this.setState({
       selectedFile: e.target.files[0]
     })
@@ -25,15 +25,12 @@ import axios from 'axios';
   }
 
   onClickHandler = (e) => {
-    console.log('Comming in here')
     e.preventDefault();
+    // this.props.dispatch(createOrg(this.state));
     const data = new FormData()
     data.append('file', this.state.selectedFile)
     data.append('name', this.state.orgName)
-    console.log(data, this.state.orgName, this.state.selectedFile);
-
-    axios.post("http://localhost:3001/api/v1/users/org", data, { 
-       // receive two    parameter endpoint url ,form data
+    axios.post("http://localhost:8000/api/v1/users/org", data, { 
       headers: { 'Content-Type': 'multipart/form-data'}
     })
    .then(res => { // then print response status
@@ -43,8 +40,8 @@ import axios from 'axios';
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui form form_create">
+      <div className="ui inverted segment">
+        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui inverted form form_create">
           <div className="five wide field">
             <label>Create Organization</label>
             <input type="text" value={this.state.orgName} onChange={this.changeOrgName} />
@@ -60,4 +57,4 @@ import axios from 'axios';
   }
 }
 
-export default Organization;
+export default connect()(Organization);
