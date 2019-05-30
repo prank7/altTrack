@@ -11,11 +11,10 @@ import axios from 'axios';
    
   }
   
-  onChangeHandler=event=>{
-    console.log(event.target.files[0]);
+  onChangeHandler= (e) =>{
+    console.log(e.target.files[0]);
     this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
+      selectedFile: e.target.files[0]
     })
   }
 
@@ -23,7 +22,7 @@ import axios from 'axios';
     e.preventDefault();
     const data = new FormData()
     data.append('file', this.state.selectedFile)
-    axios.post("http://localhost:3001/api/v1/users/org", data, { 
+    axios.post("http://localhost:8000/api/v1/users/org", data, { 
        // receive two    parameter endpoint url ,form data
    })
    .then(res => { // then print response status
@@ -34,7 +33,7 @@ import axios from 'axios';
   render() {
     return (
       <div>
-        <form onSubmit={this.onClickHandler} className="ui form form_create">
+        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui form form_create">
           <div className="five wide field">
             <label>Create Organization</label>
             <input type="text"/>

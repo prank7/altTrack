@@ -25,29 +25,27 @@ exports.createOrg = (req, res, next) => {
 		} else if (err) {
 			return res.status(500).json(err)
 		}
-		console.log(req.file);
-		// return res.status(200).send(req.file)
-
 		Org.findOne({ name: req.body.name })
-			.exec()
-			.then(foundOrg => {
-				if (foundOrg) {
-					return res.status(409).json({
-						success: false,
-						message: 'Name taken. Please use another name.'
+		.exec()
+		.then(foundOrg => {
+			if (foundOrg) {
+				return res.status(409).json({
+					success: false,
+					message: 'Name taken. Please use another name.'
+				});
+			} else {
+				var newOrg = {
+					name: req.body.name,
+					creator: req.body.creator,
+					imageUrl: req.file.filename,
+					location: req.body.location,
+				}
+				Org.create(newOrg, (err, createdOrg) => {
+					if (!err) return res.json({
+						success: true,
 					});
-				} else {
-					var newOrg = {
-						name: req.body.name,
-						creator: req.body.creator,
-						imageUrl: req.file.filename,
-						location: req.body.location,
-					}
-					Org.create(newOrg, (err, createdOrg) => {
-						if (!err) return res.json({
-							success: true,
-						});
-						console.log(createdOrg, 'this is createdOrg');
+					console.log(createdOrg, 'this is createdOrg');
+						return res.status(200).send(req.file)
 					});
 				}
 			});
