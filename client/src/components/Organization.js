@@ -5,10 +5,10 @@ import axios from 'axios';
  class Organization extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        selectedFile: null,
-        orgName: '',
-      }
+    this.state = {
+      selectedFile: null,
+      orgName: '',
+    }
   }
   
   onChangeHandler=event=>{
@@ -16,29 +16,29 @@ import axios from 'axios';
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0,
-    })
+    });
   }
 
   changeOrgName = (e) => {
     this.setState({
       orgName: e.target.value
-    })
+    });
   }
 
   onClickHandler = (e) => {
     console.log('Comming in here')
     e.preventDefault();
-    const data = new FormData()
+    const data = new FormData();
     data.append('file', this.state.selectedFile)
     data.append('name', this.state.orgName)
     console.log(data, this.state.orgName, this.state.selectedFile);
 
-    axios.post("http://localhost:3001/api/v1/users/org", data, { 
+    axios.post("http://localhost:8000/api/v1/users/org", data, { 
        // receive two    parameter endpoint url ,form data
       headers: { 'Content-Type': 'multipart/form-data'}
     })
    .then(res => { // then print response status
-    console.log(res.statusText)
+    console.log(res.statusText);
   })
   }
 

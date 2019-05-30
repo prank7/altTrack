@@ -7,7 +7,7 @@ class Nav extends React.Component {
   handleClick = (e) => {
     e.preventDefault();
     localStorage.removeItem('token');
-    this.props.history.push('/');
+    // this.props.history.push('/');
   }
 
 
