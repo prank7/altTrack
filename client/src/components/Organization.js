@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { connect } from 'react-redux';
 import OrganizationList from './OrganizationList';
-
+import { orgList } from '../store/actions/Action';
+import axios from 'axios';
  class Organization extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: null,
+      selectedFile: '',
       orgName: '',
       location: '',
       creator: localStorage.getItem('id')
@@ -15,10 +15,28 @@ import OrganizationList from './OrganizationList';
   }
   
   onChangeHandler= (e) =>{
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    });
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/altify/image/upload';
+    const CLOUDINARY_PRESET = 'esj6xqzd';
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('cloud_name', 'altify');
+    formData.append('upload_preset', CLOUDINARY_PRESET);
+    axios
+    .post(CLOUDINARY_URL, formData, {
+      crossdomain: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => {
+      if(res.status == 200){
+        const {secure_url} = res.data;
+        this.setState({
+          selectedFile : secure_url
+        })
+      }
+    })
   }
 
   changeOrgName = (e) => {
@@ -35,23 +53,11 @@ import OrganizationList from './OrganizationList';
 
   onClickHandler = (e) => {
     e.preventDefault();
-    const token = this.props.token;
-    const data = new FormData();
-    data.append('file', this.state.selectedFile);
-    data.append('name', this.state.orgName);
-    data.append('location',this.state.location);
-    data.append('creator',this.state.creator);
-    console.log(data, this.state.orgName, this.state.selectedFile);
-
-    axios.post("http://localhost:8000/api/v1/users/org", data, { 
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': "bearer " + token
-    }
-    }).then(data => console.log(data, 'data coming from axios'));
+    this.props.dispatch(orgList(this.state));
   }
 
   render() {
+    console.log(this.state.selectedFile, 'set in state')
     return (
     <>
       <div className="ui inverted segment">
@@ -64,7 +70,6 @@ import OrganizationList from './OrganizationList';
             <label>location</label>
             <input type="text" value={this.state.location} onChange={this.handleLocation} />
           </div>
-          {/* <input type="hidden" value={this.state.creator}/> */}
           <div className="five wide field">
             <label>upload image</label>
             <input name="file" onChange={this.onChangeHandler}  type="file"/>
@@ -72,16 +77,11 @@ import OrganizationList from './OrganizationList';
           <button  type="submit" className="ui button">Create</button>
         </form>
       </div>
-      {/* <OrganizationList/> */}
+      <OrganizationList/>
     </>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.token
-  }
-}
 
-export default connect(mapStateToProps)(Organization);
+export default connect()(Organization);

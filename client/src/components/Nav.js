@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 class Nav extends React.Component {
 
   handleClick = (e) => {
+    //remove tokenand userData from redux store make isAuth false.
     localStorage.removeItem('token');
     window.location.reload(); 
-    <Redirect to="/"/>
   }
 
 
   render () {
     const { token } = this.props;
-    console.log(this.props.token, 'checking token');
+    // console.log(this.props.token, 'checking token');
     if(token !== 'undefined' && token){
       return (
         <div>

@@ -65,11 +65,20 @@ exports.registerUser = (req, res, next) => {
 	});
 }
 
-// exports.user = (req,res) => {
-// 	User.findById(req.params.id,{ password : 0 },(err,data) => {
-// 		if(err){
-// 			res.status(404).send({message: "user not found"})
-// 		}
-// 		res.send(data);
-// 	})
-// }
+exports.user = (req,res) => {
+
+	let token = req.headers['Authorization'] || req.headers['authorization'] || null;
+	token = token.split(' ')[1]
+	User.findById(req.userId,(err,user) => {
+		if(err){
+			return res.status(404).json({message: "user not found"})
+		}
+		res.json({
+			message: 'Verified successfull',
+			token,
+			email: user.email,
+			name: user.name,
+			userId: user._id,
+		});
+	})
+}

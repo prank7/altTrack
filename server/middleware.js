@@ -1,10 +1,19 @@
+const jwt = require('jsonwebtoken')
+
 module.exports = {
   isLoggedIn : function(req,res,next){
-    console.log(req.user, req.headers.cookie, "req user check");
-    if(!req.user){
-      return res.status(400).send({message: "login to get user info"});
-    }
+    const token = req.headers['Authorization'] || req.headers['authorization'] || null;
 
-    next();
+    if (!token) return res.json({ message: 'unAuthorized user' });
+    const BearerToken = token.split(' ');
+    const headerBearer = BearerToken[1];
+    jwt.verify(headerBearer, 'thisisfreakingawesome', (err, decode) => {
+      if (err) return res.json({
+        unVerified:true,
+        message: 'Send proper token dude'
+      }) 
+      req.userId = decode.userId;
+      next()  
+    })
   }
 }

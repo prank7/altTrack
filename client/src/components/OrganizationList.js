@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-const API = "http://localhost:8000/api/v1";
+import { Link } from 'react-router-dom';
 
 class OrganizationList extends Component {
   
-  constructor() {
-    super();
-    fetch(`${API}/users/orgdetails`)
-    .then( res => res.json())
-    .then(data => console.log(data));
-  }
-  
   render() {
-    // console.log(this.props.orgList);
+    const {orgList} = this.props
     return (
       <div>
-        
+        {
+          orgList && orgList.map(single => 
+          <>
+          <div key={single._id}>
+              <Link to={`/users/singleorg/${single._id}`}>{single.name}</Link>
+              <img src={`public/uploads/${single.imageUrl.name}`} alt=""/>  
+          </div>
+          </>
+          )
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  orgList: state.orgList
+  return {
+    orgList : state.orgList
+  }
 }
 
 export default connect(mapStateToProps)(OrganizationList);

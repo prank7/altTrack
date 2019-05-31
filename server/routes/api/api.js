@@ -4,6 +4,8 @@ const userController = require('../../controllers/userController');
 
 const orgController = require('../../controllers/orgController');
 
+const middleware = require('../../middleware')
+
 
 var multer = require('multer');
 var path = require('path');
@@ -20,15 +22,22 @@ var storage = multer.diskStorage({
 	}
 })
 
+// function check(req,res,next){
+// 	console.log('Check', req.headers);
+// 	next()
+// }
+
 var upload = multer({ storage: storage });
 
 //Login Form Submit 
-router.post('/users/login', userController.loginUser);
+router.post('/user/login', userController.loginUser);
 
 //Register Page Submit
 router.post('/register', userController.registerUser);
 
 //CreateOrg page submit
-router.post('/users/org',upload.single('file'), orgController.createOrg);
+router.post('/user/org' ,upload.single('file'), orgController.createOrg);
+
+router.get('/user/verify', middleware.isLoggedIn ,userController.user )
 
 module.exports =router;
