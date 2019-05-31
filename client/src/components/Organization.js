@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { connect } from 'react-redux';
 import OrganizationList from './OrganizationList';
+import { orgList } from '../store/actions/Action';
 
  class Organization extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: null,
+      selectedFile: '',
       orgName: '',
       location: '',
       creator: localStorage.getItem('id')
@@ -35,20 +35,7 @@ import OrganizationList from './OrganizationList';
 
   onClickHandler = (e) => {
     e.preventDefault();
-    const token = this.props.token;
-    const data = new FormData();
-    data.append('file', this.state.selectedFile);
-    data.append('name', this.state.orgName);
-    data.append('location',this.state.location);
-    data.append('creator',this.state.creator);
-    console.log(data, this.state.orgName, this.state.selectedFile);
-
-    axios.post("http://localhost:8000/api/v1/users/org", data, { 
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': "bearer " + token
-    }
-    }).then(res => res.json()).then(data => console.log(data));
+    this.props.dispatch(orgList(this.state));
   }
 
   render() {
@@ -64,7 +51,6 @@ import OrganizationList from './OrganizationList';
             <label>location</label>
             <input type="text" value={this.state.location} onChange={this.handleLocation} />
           </div>
-          {/* <input type="hidden" value={this.state.creator}/> */}
           <div className="five wide field">
             <label>upload image</label>
             <input name="file" onChange={this.onChangeHandler}  type="file"/>
@@ -72,16 +58,11 @@ import OrganizationList from './OrganizationList';
           <button  type="submit" className="ui button">Create</button>
         </form>
       </div>
-      {/* <OrganizationList/> */}
+      <OrganizationList/>
     </>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.token
-  }
-}
 
-export default connect(mapStateToProps)(Organization);
+export default connect()(Organization);

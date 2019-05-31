@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Organization from './components/Organization';
+import SingleOrg from './components/SingleOrg';
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/users/register" component={Register} />
           <Route exact path="/users/login" component={Login} />
           <Route exact path="/users/org" component={Organization}/>
+          <Route exact path="/users/singleorg/:id" component={SingleOrg}/>          
         </Switch>
       </div>
     </Router>

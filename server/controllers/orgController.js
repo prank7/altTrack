@@ -15,7 +15,7 @@ exports.createOrg = (req, res, next) => {
 				var newOrg = {
 					name: req.body.name,
 					creator: req.body.creator,
-					imageUrl: req.file,
+					imageUrl: req.file.filename,
 					location: req.body.location,
 				}
 				console.log(newOrg, 'Printing the org information')

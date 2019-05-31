@@ -37,13 +37,23 @@ const API = "http://localhost:8000/api/v1";
   }
 }
 
-export function orgList(){
-	fetch(`${API}/users/orgdetails`)
-	.then( res => res.json())
-	.then(data => 
-			dispatch({
-			type: "ORGANIZATIONS",
-			data
-		})
-		)
+export function orgList(formData){
+	const token = localStorage.getItem('token');
+	const data = new FormData();
+    data.append('file', formData.selectedFile);
+    data.append('name', formData.orgName);
+    data.append('location',formData.location);
+		data.append('creator',formData.creator);
+		console.log(formData.selectedFile);
+	return dispatch => {
+		axios.post("http://localhost:8000/api/v1/users/org", data, { 
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': "bearer " + token
+    }
+    }).then(response => dispatch({
+			type: "ORG_LIST",
+			response
+		}));
+	}
 }
