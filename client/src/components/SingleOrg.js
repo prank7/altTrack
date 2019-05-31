@@ -19,13 +19,13 @@ class SingleOrg extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    
+
   }
 
   render() {
     const { orgList } = this.props;
      const matchId = orgList.filter(obj => obj._id === this.props.match.params.id)[0];
-     console.log(matchId);
+    //  console.log(matchId);
     return (
       <div>
         <div>

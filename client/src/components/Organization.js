@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import OrganizationList from './OrganizationList';
 import { orgList } from '../store/actions/Action';
-
+import axios from 'axios';
  class Organization extends Component {
   constructor(props) {
     super(props);
@@ -15,10 +15,28 @@ import { orgList } from '../store/actions/Action';
   }
   
   onChangeHandler= (e) =>{
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
-    });
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/altify/image/upload';
+    const CLOUDINARY_PRESET = 'esj6xqzd';
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('cloud_name', 'altify');
+    formData.append('upload_preset', CLOUDINARY_PRESET);
+    axios
+    .post(CLOUDINARY_URL, formData, {
+      crossdomain: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => {
+      if(res.status == 200){
+        const {secure_url} = res.data;
+        this.setState({
+          selectedFile : secure_url
+        })
+      }
+    })
   }
 
   changeOrgName = (e) => {
@@ -39,6 +57,7 @@ import { orgList } from '../store/actions/Action';
   }
 
   render() {
+    console.log(this.state.selectedFile, 'set in state')
     return (
     <>
       <div className="ui inverted segment">

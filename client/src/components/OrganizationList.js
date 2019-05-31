@@ -13,7 +13,7 @@ class OrganizationList extends Component {
           <>
           <div key={single._id}>
               <Link to={`/users/singleorg/${single._id}`}>{single.name}</Link>
-              <img src={`http://localhost:8000/users/${single.imageUrl}`} alt=""/>  
+              <img src={`public/uploads/${single.imageUrl.name}`} alt=""/>  
           </div>
           </>
           )

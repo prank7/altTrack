@@ -10,12 +10,22 @@ import {
   BrowserRouter as Router,
   Route, Switch
 } from 'react-router-dom';
-
-
+import { isVerified } from './store/actions/Action';
+import { connect } from 'react-redux';
 
 
 class App extends Component {
+
+componentDidMount(){
+  const{isAuth,token} = this.props;
+  if(token && !isAuth){
+    // console.log('is veriied Called');
+    this.props.dispatch(isVerified());
+  }
+}
+
   render() {
+
     return (
     <Router>
       <div className="App">
@@ -31,5 +41,10 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+const mapStateToProps=(state)=>{
+  return{
+    token:state.token,
+    isAuth:state.isAuth,
+  }
+}
+export default connect(mapStateToProps)(App);

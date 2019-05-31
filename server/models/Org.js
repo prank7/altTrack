@@ -14,7 +14,8 @@ var orgSchema = new Schema({
 		ref: 'User',
 	},
 	imageUrl: {
-		type: String,
+		name: String,
+		imageType: String
 	},
 	location: {
 		type: String,
