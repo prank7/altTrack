@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const API = "http://localhost:8000/api/v1";
  
  export function registerAction(data){
@@ -18,6 +20,7 @@ const API = "http://localhost:8000/api/v1";
  }
 
  export function loginAction(data){
+	 console.log(data);
   return dispatch => {
     fetch(`${API}/users/login`, {
 			method: 'POST',
@@ -32,4 +35,15 @@ const API = "http://localhost:8000/api/v1";
       data
 		}));
   }
+}
+
+export function orgList(){
+	fetch(`${API}/users/orgdetails`)
+	.then( res => res.json())
+	.then(data => 
+			dispatch({
+			type: "ORGANIZATIONS",
+			data
+		})
+		)
 }

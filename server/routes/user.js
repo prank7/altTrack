@@ -19,11 +19,7 @@ router.get('/org', (err, res) => {
 	res.render('index');
 });
 
-router.get('/orgdetails', (err, res) => {
-	Org.find
-	res.render('index');
-});
+// router.get('/user/:id', userController.user);
 
 module.exports = router;
 	
-

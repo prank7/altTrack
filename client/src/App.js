@@ -3,13 +3,15 @@ import './App.scss';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
+import Organization from './components/Organization';
 
 import {
   BrowserRouter as Router,
   Route, Switch
 } from 'react-router-dom';
 
-import Organization from './components/Organization';
+
+
 
 class App extends Component {
   render() {
