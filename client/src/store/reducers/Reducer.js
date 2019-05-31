@@ -1,6 +1,7 @@
 const initState = {
   userData : {},
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem('token') || '',
+  creatorId: localStorage.getItem('id') || '',
   orgList: []
 };
 
@@ -13,15 +14,16 @@ export default function rootReducer(state = initState,action) {
       return {
         ...state,
         userData : action.data,
+        creatorId: localStorage.setItem('id',action.data.userId),
         token: localStorage.setItem('token',action.data.token)
       }
     }
-    // case "CREATE_ORGANIZATION": {
-    //   return {
-    //     ...state,
-    //     orgList : action.data
-    //   }
-    // }
+    case "ORGANIZATIONS": {
+      return {
+        ...state,
+        orgList : action.data
+      }
+    }
   default:
     return state;
   }

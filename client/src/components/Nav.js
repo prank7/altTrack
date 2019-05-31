@@ -12,8 +12,9 @@ class Nav extends React.Component {
 
 
   render () {
-    console.log(this.props.userData);
-    if(this.props.token){
+    const { token } = this.props;
+    console.log(this.props.token, 'checking token');
+    if(token !== 'undefined' && token){
       return (
         <div>
           <ul className="main__nav">

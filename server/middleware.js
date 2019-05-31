@@ -1,23 +1,10 @@
-const jwt = require('jsonwebtoken');
-const secret = 'thisisfreakingawesome';
+module.exports = {
+  isLoggedIn : function(req,res,next){
+    console.log(req.user, req.headers.cookie, "req user check");
+    if(!req.user){
+      return res.status(400).send({message: "login to get user info"});
+    }
 
-const withAuth = function(req, res, next) {
-  const token =
-    req.body.token ||
-    req.query.token ||
-    req.headers['x-access-token'] ||
-    req.cookies.token;
-  if (!token) {
-    res.status(401).send('Unauthorized: No token provided');
-  } else {
-    jwt.verify(token, secret, function(err, decoded) {
-      if (err) {
-        res.status(401).send('Unauthorized: Invalid token');
-      } else {
-        req.email = decoded.email;
-        next();
-      }
-    });
+    next();
   }
 }
-module.exports = withAuth;

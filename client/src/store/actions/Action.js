@@ -20,6 +20,7 @@ const API = "http://localhost:8000/api/v1";
  }
 
  export function loginAction(data){
+	 console.log(data);
   return dispatch => {
     fetch(`${API}/users/login`, {
 			method: 'POST',
@@ -36,20 +37,13 @@ const API = "http://localhost:8000/api/v1";
   }
 }
 
-// export function createOrg(stateData){
-// 		const data = new FormData();
-// 		data.append('file', stateData.selectedFile);
-// 		data.append('name', stateData.orgName);
-		
-// 		axios.post("http://localhost:8000/api/v1/users/org", data, { 
-		
-// 			headers: { 'Content-Type': 'multipart/form-data'}
-		
-// 		}).then( res => console.log(res.statusText))
-// 		// .then(data => console.log(data, 'action.js line 49')
-// 		// 	dispatch({
-// 		// 	type: "CREATE_ORGANIZATION",
-// 		// 	console.log(data)
-// 		// })
-// 		// )
-// }
+export function orgList(){
+	fetch(`${API}/users/orgdetails`)
+	.then( res => res.json())
+	.then(data => 
+			dispatch({
+			type: "ORGANIZATIONS",
+			data
+		})
+		)
+}
