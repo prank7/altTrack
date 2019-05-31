@@ -8,7 +8,7 @@ const cors = require("cors");
 const path = require("path");
 const port = process.env.PORT || 8000;
 const cookieParser = require('cookie-parser');
-const withAuth = require('./server/middleware');
+// const withAuth = require('./server/middleware');
 
 
 

@@ -48,7 +48,7 @@ import OrganizationList from './OrganizationList';
         'Content-Type': 'application/json',
         'Authorization': "bearer " + token
     }
-    }).then(res => res.json()).then(data => console.log(data));
+    }).then(data => console.log(data, 'data coming from axios'));
   }
 
   render() {

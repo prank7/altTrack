@@ -12,10 +12,15 @@ exports.createOrg = (req, res, next) => {
 			});
 		} else {
 			// console.log('Here in the else condition')
+				const { filename } = req.file;
+				const iType = filename.split('.')[1]
 				var newOrg = {
 					name: req.body.name,
 					creator: req.body.creator,
-					imageUrl: req.file,
+					imageUrl: {
+						name: filename,
+						imageType: `image/${iType}`
+					},
 					location: req.body.location,
 				}
 				console.log(newOrg, 'Printing the org information')
