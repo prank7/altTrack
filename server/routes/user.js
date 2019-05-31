@@ -19,21 +19,7 @@ router.get('/org', (err, res) => {
 	res.render('index');
 });
 
-router.get('/orgdetails', (err, res) => {
-	console.log('request comes to orgdetails');
-	if(err) return console.log(err);
-	Org.find({})
-	.populate('creator')
-	.exec()
-	.then(foundOrgs => {
-		console.log(foundOrgs, 'All orgs created by logged in User');
-		if(foundOrgs) return res.status(200).json({
-			success: true,
-			foundOrgs
-		})
-	})
-});
+// router.get('/user/:id', userController.user);
 
 module.exports = router;
 	
-

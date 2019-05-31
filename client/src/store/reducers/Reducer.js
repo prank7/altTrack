@@ -1,10 +1,9 @@
 const initState = {
   userData : {},
-  token: localStorage.getItem('token')
+  token: localStorage.getItem('token') || '',
+  creatorId: localStorage.getItem('id') || '',
+  orgList: []
 };
-
-console.log('this is', initState);
-
 
 export default function rootReducer(state = initState,action) {
   switch(action.type){
@@ -12,11 +11,17 @@ export default function rootReducer(state = initState,action) {
       return state;
     }
     case "LOGIN_SUCESS":{
-      console.log('this is', initState);
       return {
         ...state,
         userData : action.data,
+        creatorId: localStorage.setItem('id',action.data.userId),
         token: localStorage.setItem('token',action.data.token)
+      }
+    }
+    case "ORGANIZATIONS": {
+      return {
+        ...state,
+        orgList : action.data
       }
     }
   default:

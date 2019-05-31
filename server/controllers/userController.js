@@ -64,3 +64,12 @@ exports.registerUser = (req, res, next) => {
 		}
 	});
 }
+
+// exports.user = (req,res) => {
+// 	User.findById(req.params.id,{ password : 0 },(err,data) => {
+// 		if(err){
+// 			res.status(404).send({message: "user not found"})
+// 		}
+// 		res.send(data);
+// 	})
+// }
