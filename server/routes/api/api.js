@@ -31,4 +31,6 @@ router.post('/register', userController.registerUser);
 //CreateOrg page submit
 router.post('/users/org',upload.single('file'), orgController.createOrg);
 
-module.exports =router;
+router.post('/users/org/invite', orgController.sendInvites);
+
+module.exports = router;

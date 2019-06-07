@@ -6,11 +6,11 @@ const initState = {
 };
 
 export default function rootReducer(state = initState,action) {
-  switch(action.type){
-    case "SIGNUP_SUCESS":{
+  switch(action.type) {
+    case "SIGNUP_SUCESS": {
       return state;
     }
-    case "LOGIN_SUCESS":{
+    case "LOGIN_SUCESS": {
       return {
         ...state,
         userData : action.data,
@@ -19,11 +19,26 @@ export default function rootReducer(state = initState,action) {
       }
     }
     case "ORGANIZATIONS": {
+      // console.log(state, action,'request coming in Reducer Organizations');
       return {
         ...state,
-        orgList : action.data
+        orgList : action.payload.data.foundOrgs
       }
     }
+    case "GET_ORGANIZATIONS": {
+      // console.log(state, action,'request coming in Reducer Organizations');
+      return {
+        ...state,
+        orgList : action.payload.orgsFound
+      }
+    }
+    // case "GET_INDIVIDUAL_ORG_INFO": {
+    //   console.log(state, action, "request coming in Reducer GET INDIVIDUAL ORG INFO");
+    //   return {
+    //     ...state,
+    //     individualOrg: action.payload
+    //   }
+    // }
   default:
     return state;
   }

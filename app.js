@@ -9,6 +9,7 @@ const path = require("path");
 const port = process.env.PORT || 8000;
 const cookieParser = require('cookie-parser');
 // const withAuth = require('./server/middleware');
+require('dotenv').config();
 
 
 

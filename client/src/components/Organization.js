@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from 'react-redux';
 import OrganizationList from './OrganizationList';
+import { getOrgList } from '../store/actions/Action';
 
  class Organization extends Component {
   constructor(props) {
@@ -14,7 +15,12 @@ import OrganizationList from './OrganizationList';
     }
   }
   
-  onChangeHandler= (e) =>{
+  componentDidMount = () => {
+    // console.log("called in cdm");
+    this.props.dispatch(getOrgList())
+  }
+  
+  onChangeHandler = (e) => {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0,
@@ -41,14 +47,19 @@ import OrganizationList from './OrganizationList';
     data.append('name', this.state.orgName);
     data.append('location',this.state.location);
     data.append('creator',this.state.creator);
-    console.log(data, this.state.orgName, this.state.selectedFile);
 
     axios.post("http://localhost:8000/api/v1/users/org", data, { 
       headers: { 
         'Content-Type': 'application/json',
         'Authorization': "bearer " + token
     }
-    }).then(data => console.log(data, 'data coming from axios'));
+    }).then(data => {
+      console.log(data, 'this is freaking data coming after Axios POST request');
+      this.props.dispatch({
+        type: 'ORGANIZATIONS',
+        payload: data
+      })
+    });
   }
 
   render() {
@@ -64,7 +75,6 @@ import OrganizationList from './OrganizationList';
             <label>location</label>
             <input type="text" value={this.state.location} onChange={this.handleLocation} />
           </div>
-          {/* <input type="hidden" value={this.state.creator}/> */}
           <div className="five wide field">
             <label>upload image</label>
             <input name="file" onChange={this.onChangeHandler}  type="file"/>
@@ -72,7 +82,9 @@ import OrganizationList from './OrganizationList';
           <button  type="submit" className="ui button">Create</button>
         </form>
       </div>
-      {/* <OrganizationList/> */}
+      <div className='org-list'>
+        <OrganizationList/>
+      </div>
     </>
     )
   }
@@ -80,7 +92,7 @@ import OrganizationList from './OrganizationList';
 
 const mapStateToProps = (state) => {
   return {
-    token: state.token
+    token: state.token,
   }
 }
 

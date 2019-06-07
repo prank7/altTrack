@@ -4,13 +4,26 @@ var Schema = mongoose.Schema;
 var teammateSchema = new Schema({
 	name: {
 		type: String,
-		required: true,
-		minLength: 4,
-		maxLength: 16,
+		default: 'aManWithNoName'
 	},
-	
+	teammateEmail: {
+		type: String,
+		unique: true,
+	},
+	isVerified: { 
+		type: Boolean, 
+		default: false 
+	},
+	refCode: {
+		type: String,
+		unique: true,
+	},
+	org: {
+		type: Schema.Types.ObjectId,
+		ref: 'Org',
+	}
 })
 
-var Teammate = mongoose.model('Org', teammateSchema);
+var Teammate = mongoose.model('Teammate', teammateSchema);
 
 module.exports = Teammate;
