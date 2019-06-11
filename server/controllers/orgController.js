@@ -71,19 +71,47 @@ exports.sendInvites = (req, res, next) => {
 	let refCode;
 		refCode = randomN(6);
 		link = `http://${host}/users/register?ref=${refCode}`;
-		const {teammateEmail} = req.body;
+		const {teammateEmail, org} = req.body;
 
 		//creating new Teammate
 		const newTeammate = {
 			teammateEmail: teammateEmail,
 			refCode: refCode,
+			org: org,
 		}
 
 		//saving the teammateEmail and refCode for future reference
-	Teammate.create(newTeammate, (err, invitedTeammate) => {
-		console.log(err, invitedTeammate, 'This is invited Teammate');
-	})
 
+		//Checking if the invited user is already a member of any existing Orgs.
+		Teammate.findOne({teammateEmail: teammateEmail})
+		.exec()
+		.then(teammate => {
+			if(teammate) {
+				console.log(teammate, 'this Teammate is already a part of one of existing Orgs');
+				//find the Teammate and update the Org here
+				Teammate.findOneAndUpdate({teammateEmail: teammateEmail}, {org: org}, {new: true}, (err, updatedTeammate) => {
+					if(err) return res.status(500).json({
+						success: false,
+						message: 'Unable to update existing Teammate'
+					})
+					console.log(updatedTeammate);
+				})
+			}
+			//if teammate not exists in DB;
+			Teammate.create(newTeammate, (err, invitedTeammate) => {
+				//Set isVerified flag
+				if(err) return res.status(500).json({
+					success: false,
+					message: 'Unexpected error encountered while creating newTeammate.'
+				})
+				console.log(invitedTeammate, 'This is invited Teammate')
+				if(invitedTeammate) return res.status(200).json({
+					success: false,
+					message: 'new Teammate validated and created in DB. Email authentication not required.',
+					invitedTeammate
+				});
+			})
+		})
 
 		mailOptions = {
 			to: teammateEmail,

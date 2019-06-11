@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 // const withAuth = require('../middleware');
 var Org = require('../models/Org');
+var Teammate = require('../models/Teammate');
 
 var userController = require('../controllers/userController');
 
@@ -9,6 +10,23 @@ var userController = require('../controllers/userController');
 router.get('/register', (req, res) => {
 	res.render('index');
 });
+
+router.get('/register/verify/:id', (req, res) => {
+	console.log(req.params.id);
+	Teammate.findOne({refCode: req.params.id})
+	.exec()
+	.then(foundTeammate => {
+		if(!foundTeammate) return res.status(500).json({
+			success: false,
+			message: 'Invited User Not Found!'
+		})
+		console.log(foundTeammate, 'this was foundTeammate');
+		if(foundTeammate) return res.status(200).json({
+			success: true,
+			foundTeammate
+		})
+	})
+})
 
 //render login page
 router.get('/login', (req, res) => {
@@ -25,7 +43,6 @@ router.get('/org/invite', (req, res) => {
 
 //gets list of all existing oranizations
 router.get('/orglist', (req, res) => {
-	console.log('request received in OrgList');
 	Org.find().exec().then(orgsFound => {
 		if(orgsFound) return res.status(200).json({
 			success:true,
@@ -52,10 +69,22 @@ router.get('/org/:id', (req, res) => {
 	.populate('creator')
 	.exec()
 	.then(org => {
-		if(org) return res.status(200).json({
-			success: true,
-			org
+		if(!org) return res.status(500).json({
+			success: false,
+			message: 'Server error'
 		})
+		if(org) {
+			Teammate.find({org: req.params.id})
+			.populate('org')
+			.exec()
+			.then(teammate => {
+				return res.status(200).json({
+					success: true,
+					org,
+					teammate
+				})
+			})
+		}
 	})
 })
 

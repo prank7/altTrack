@@ -40,7 +40,7 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.registerUser = (req, res, next) => {
-	// console.log(req.body, 'this is body in registerUser');
+	console.log(req.body, 'this is body in registerUser');
 	User.findOne({email: req.body.email})
 	.exec()
 	.then(user => {

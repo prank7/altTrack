@@ -246,6 +246,35 @@ h6 {
 	.org-box {
 		border: 1px solid palevioletred;
 	}
-	
 }
 
+.mygrid {
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 5px;
+}
+
+.myflex {
+	display: flex;
+	justify-content: space-around;
+}
+
+.org-details-container {
+	border: 1px solid;
+	
+	h3 {
+		text-align: center;
+		background: palevioletred;
+	}
+}
+
+.org-details {
+	display: flex;
+
+	p {
+		margin-left: 5px;
+	}
+
+	:last-child {
+		font-weight: bold;
+	}
+}

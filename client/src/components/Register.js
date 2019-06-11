@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { registerAction } from '../store/actions/Action';
 import Nav from './Nav';
+var queryString = require('query-string');
 
-const API = 'http://localhost:8000/api/v1';
 
 class Register extends React.Component {
 	constructor() {
@@ -14,6 +14,22 @@ class Register extends React.Component {
 			name: '',
 			email: '',
 			password: '',
+			isInvited: false,
+		}
+	}
+
+	componentDidMount = () => {
+		const {ref} = queryString.parse(location.search);
+		if(ref) {
+			fetch(`http://localhost:8000/users/register/verify/${ref}`)
+			.then(res => res.json())
+			.then(({foundTeammate: {teammateEmail}}) => {
+				this.setState(state => ({
+					...state,
+					email: teammateEmail,
+					isInvited: true,
+				}))
+			})
 		}
 	}
 
@@ -27,8 +43,10 @@ class Register extends React.Component {
 		this.setState({
 			[e.target.name]: e.target.value,
 		})
-		this.props.history.push('/login');
+		// this.props.history.push('/login');
 	}
+
+
 
 	render() {
 		return(
@@ -37,12 +55,12 @@ class Register extends React.Component {
 				<div className="register">
 					<form className="form__signup ui  form" onSubmit={(e)=>this.handleSubmit(e)}>
 					<div className="field">
-					<label>username:</label>
+					<label>name:</label>
 					<input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name"/><br/>
 					</div>
 					<div className="field">
 					<label>email:</label>
-						<input value={this.state.email} onChange={(e) => this.handleChange(e)} type="email" name="email" /><br/><br/>
+					<input disabled={this.state.isInvited} value={this.state.email || ''} onChange={(e) => this.handleChange(e)} type="email" name="email" /><br/><br/>
 					</div>
 					<div className="field">
 					<label>password:</label>

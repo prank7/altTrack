@@ -12,7 +12,7 @@ var teammateSchema = new Schema({
 	},
 	isVerified: { 
 		type: Boolean, 
-		default: false 
+		default: false,
 	},
 	refCode: {
 		type: String,

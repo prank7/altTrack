@@ -1,4 +1,5 @@
 import React from 'react';
+import Teammate from './Teammate';
 // import {connect} from 'react-redux';
 
 
@@ -22,17 +23,29 @@ class OrgDetails extends React.Component {
 
 	render() {
 		return (
-				<section>
+				<section className='org-details-container'>
 					<h3>Organization Details</h3>
 					{
 					this.state.org ? (
 						<>
-							<p>{this.state.org.name}</p>
-							<p>{this.state.org.location}</p>
-							<p>{this.state.org.creator.name}</p>
+						<div className='org-details-sub-container'>
+							<span className='org-details'>
+								<p>Name: </p>
+								<p> {this.state.org.name}</p>
+							</span>
+							<span className='org-details'>
+								<p>Location: </p>
+								<p> {this.state.org.location}</p>
+							</span>
+							<span className='org-details'>
+								<p>Created by: </p>
+								<p> {this.state.org.creator.name}</p>
+							</span>
+						</div>
 						</>
 					) : null
 					}
+				<Teammate data={this.state.org}/>
 				</section>
 		)
 	}

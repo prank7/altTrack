@@ -65,7 +65,7 @@ import { getOrgList } from '../store/actions/Action';
   render() {
     return (
     <>
-      <div className="ui inverted segment">
+      <div className="ui inverted segment myflex">
         <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui inverted form form_create">
           <div className="five wide field">
             <label>Create Organization</label>
@@ -81,9 +81,9 @@ import { getOrgList } from '../store/actions/Action';
           </div>
           <button  type="submit" className="ui button">Create</button>
         </form>
-      </div>
-      <div className='org-list'>
-        <OrganizationList/>
+        <div className='org-list'>
+          <OrganizationList/>
+        </div>
       </div>
     </>
     )

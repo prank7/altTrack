@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 class Teammate extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
 			teammateEmail: '',
 			//Add flag for invite sent?
@@ -24,6 +25,7 @@ class Teammate extends React.Component {
 
 		const data = {
 			teammateEmail: this.state.teammateEmail,
+			org: this.props.data._id,
 			};
 
 		axios.post("http://localhost:8000/api/v1/users/org/invite", data, {
