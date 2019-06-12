@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+const messageStyle = {
+  color: 'blue',
+};
+
 
 class Teammate extends React.Component {
 	constructor(props) {
@@ -10,6 +14,7 @@ class Teammate extends React.Component {
 		this.state = {
 			teammateEmail: '',
 			//Add flag for invite sent?
+			inviteConfirmMessage: '', 
 		}
 	}
 
@@ -33,8 +38,12 @@ class Teammate extends React.Component {
 				'Content-Type': 'application/json',
 				'Authorization': "bearer " + token
 			}
-		}).then(data => console.log(data)
+		}).then(data => {
+			console.log(data, 'this is data on Teammate Invite Axios')
+			this.setState({inviteConfirmMessage: data.data.message})
+		}
 		);
+		this.setState({teammateEmail: ''});
 	}
 
 
@@ -43,6 +52,11 @@ class Teammate extends React.Component {
 			<>
 				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui inverted form form_create">
 					<input value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
+					<p style={messageStyle}>
+					{
+						this.state.inviteConfirmMessage ? this.state.inviteConfirmMessage : null
+					}
+					</p>
 					<input type='submit' value='Send Invitation' />
 				</form>
 			</>

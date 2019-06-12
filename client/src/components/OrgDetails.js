@@ -17,7 +17,7 @@ class OrgDetails extends React.Component {
 		.then(res => res.json())
     .then(data => {
 			console.log(data, 'data in orgDetails Fetch');
-			this.setState({org: data.org})
+			this.setState({org: data.org, teammate: data.teammate})
     })
 	}
 
@@ -46,6 +46,10 @@ class OrgDetails extends React.Component {
 					) : null
 					}
 				<Teammate data={this.state.org}/>
+				{
+					this.state.teammate && this.state.teammate.map(teammate => 
+								<p>{teammate.name}</p>)	
+				}
 				</section>
 		)
 	}

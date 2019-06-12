@@ -4,6 +4,8 @@ const userController = require('../../controllers/userController');
 
 const orgController = require('../../controllers/orgController');
 
+var userRouter = require('../user');
+
 
 var multer = require('multer');
 var path = require('path');
@@ -32,5 +34,7 @@ router.post('/register', userController.registerUser);
 router.post('/users/org',upload.single('file'), orgController.createOrg);
 
 router.post('/users/org/invite', orgController.sendInvites);
+
+router.use('/users', userRouter);
 
 module.exports = router;

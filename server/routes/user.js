@@ -51,19 +51,6 @@ router.get('/orglist', (req, res) => {
 	})
 })
 
-// router.get('/org/:id', (req, res) => {
-// 	Org.findOne({_id: req.params.id}, (err, org) => {
-// 		if(err) return res.status(500).json({
-// 			success: false,
-// 			message: 'Server error'
-// 		})
-// 		if(org) return res.status(200).json({
-// 			success: true,
-// 			org
-// 		})
-// 	})
-// })
-
 router.get('/org/:id', (req, res) => {
 	Org.findOne({_id: req.params.id})
 	.populate('creator')

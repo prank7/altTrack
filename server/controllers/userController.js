@@ -39,8 +39,7 @@ exports.loginUser = (req, res, next) => {
 	});
 }
 
-exports.registerUser = (req, res, next) => {
-	console.log(req.body, 'this is body in registerUser');
+exports.registerUser = (req, res) => {
 	User.findOne({email: req.body.email})
 	.exec()
 	.then(user => {
@@ -56,10 +55,10 @@ exports.registerUser = (req, res, next) => {
 				password: req.body.password,
 			}
 			User.create(newUser, (err, user) => {
+				console.log(user, 'registered user');
 				if(!err) return res.json({
 					success: true,
 				});
-				console.log(user, 'registered user');
 			});
 		}
 	});

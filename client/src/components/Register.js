@@ -36,6 +36,7 @@ class Register extends React.Component {
 	handleSubmit =(e)=> {
 		e.preventDefault();
 		this.props.dispatch(registerAction(this.state));
+		this.props.history.push('/users/login')
 
 	}
 

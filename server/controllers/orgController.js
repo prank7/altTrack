@@ -79,9 +79,6 @@ exports.sendInvites = (req, res, next) => {
 			refCode: refCode,
 			org: org,
 		}
-
-		//saving the teammateEmail and refCode for future reference
-
 		//Checking if the invited user is already a member of any existing Orgs.
 		Teammate.findOne({teammateEmail: teammateEmail})
 		.exec()
@@ -92,35 +89,38 @@ exports.sendInvites = (req, res, next) => {
 				Teammate.findOneAndUpdate({teammateEmail: teammateEmail}, {org: org}, {new: true}, (err, updatedTeammate) => {
 					if(err) return res.status(500).json({
 						success: false,
-						message: 'Unable to update existing Teammate'
-					})
-					console.log(updatedTeammate);
-				})
+						message: 'Unable to update Org of existing Teammate'
+					});
+					if(updatedTeammate) return res.status(200).json({
+						success: true,
+						message: 'new Teammate validated and added to Org. Email authentication not required.',
+						updatedTeammate
+					});
+				});
 			}
 			//if teammate not exists in DB;
-			Teammate.create(newTeammate, (err, invitedTeammate) => {
-				//Set isVerified flag
-				if(err) return res.status(500).json({
-					success: false,
-					message: 'Unexpected error encountered while creating newTeammate.'
-				})
-				console.log(invitedTeammate, 'This is invited Teammate')
-				if(invitedTeammate) return res.status(200).json({
-					success: false,
-					message: 'new Teammate validated and created in DB. Email authentication not required.',
-					invitedTeammate
+			if(!teammate) {
+				Teammate.create(newTeammate, (err, invitedTeammate) => {
+					if(err) return res.status(500).json({
+						success: false,
+						message: 'Unexpected error encountered while creating newTeammate.'
+					})
+					if(invitedTeammate) {
+						//send email for validation
+						mailOptions = {
+							to: teammateEmail,
+							subject: "You've been invited to join altify organization",
+							html: `Hello, <br>Please <a href='${link}'>click here</a> to join the altify organization.`
+						}
+						smtpTransport.sendMail(mailOptions, (err, info) => {
+							if (err) return res.status(406).json({ error: "Encountered a problem while sending the invitation email" });
+							return res.json({
+								success: true,
+								message: `Invitation email sent to ${mailOptions.to}`});
+						});
+					}
 				});
-			})
-		})
+			}
 
-		mailOptions = {
-			to: teammateEmail,
-			subject: "You've been invited to join altify organization",
-			html: `Hello, <br>Please <a href='${link}'>click here</a> to join the altify organization.`
-		}
-		smtpTransport.sendMail(mailOptions, (err, info) => {
-			if (err) return res.status(406).json({ error: "Encountered a problem while sending the email" });
-			return res.json({
-				message: `Message sent to ${mailOptions.to}`});
-		});
-	}
+	});
+}
