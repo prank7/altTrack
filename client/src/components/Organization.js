@@ -54,7 +54,7 @@ import { getOrgList } from '../store/actions/Action';
         'Authorization': "bearer " + token
     }
     }).then(data => {
-      console.log(data, 'this is freaking data coming after Axios POST request');
+      // console.log(data, 'this is freaking data coming after Axios POST request');
       this.props.dispatch({
         type: 'ORGANIZATIONS',
         payload: data
@@ -65,23 +65,25 @@ import { getOrgList } from '../store/actions/Action';
   render() {
     return (
     <>
-      <div className="ui inverted segment myflex">
-        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui inverted form form_create">
-          <div className="five wide field">
-            <label>Create Organization</label>
-            <input type="text" value={this.state.orgName} onChange={this.changeOrgName} />
+      <div className="columns">
+        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="column is-half">
+          <div className='column is-6'>
+            <div className="five wide field">
+              <label className='label'>Create Organization</label>
+              <input className='input' type="text" value={this.state.orgName} onChange={this.changeOrgName} />
+            </div>
+            <div className="five wide field">
+              <label className='label'>location</label>
+              <input className='input' type="text" value={this.state.location} onChange={this.handleLocation} />
+            </div>
+            <div className="five wide field">
+              <label className='label'>upload image</label>
+              <input className='input' name="file" onChange={this.onChangeHandler}  type="file"/>
+            </div>
+            <button type="submit" className="button bg-primary">Create</button>
           </div>
-          <div className="five wide field">
-            <label>location</label>
-            <input type="text" value={this.state.location} onChange={this.handleLocation} />
-          </div>
-          <div className="five wide field">
-            <label>upload image</label>
-            <input name="file" onChange={this.onChangeHandler}  type="file"/>
-          </div>
-          <button  type="submit" className="ui button">Create</button>
         </form>
-        <div className='org-list'>
+        <div className='column is-half'>
           <OrganizationList/>
         </div>
       </div>

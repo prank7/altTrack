@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Organization from './components/Organization';
 import Teammate from './components/Teammate';
 import OrgDetails from './components/OrgDetails';
+import Landing from './components/Landing';
 
 import {
   BrowserRouter as Router,
@@ -25,8 +26,8 @@ class App extends Component {
           <Route exact path="/users/org" component={Organization}/>
           <Route exact path="/users/org/invite" component={Teammate}/>
           <Route exact path="/users/org/:id" component={OrgDetails}/>
+          <Route exact path="/landing" component={Landing}/>
 
-          
         </Switch>
       </div>
     </Router>

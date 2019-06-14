@@ -10,10 +10,13 @@ const API = "http://localhost:8000/api/v1";
 			body: JSON.stringify(data)
 		})
 		.then(res => res.json())
-		.then(data => dispatch({
+		.then(data => {
+			console.log(data, 'thisis freaking data from registerAction');
+			dispatch({
       type : "SIGNUP_SUCESS",
       data
-    }));
+		})
+	});
   }
  }
 
@@ -38,7 +41,7 @@ const API = "http://localhost:8000/api/v1";
 export function getOrgList() {
 	// console.log("called in action");
 	return dispatch => {
-		fetch("http://localhost:8000/users/orglist")
+		fetch("http://localhost:8000/api/v1/users/orglist")
 		.then(res => res.json())
 		.then(data => dispatch({
 			type: "GET_ORGANIZATIONS",

@@ -1,5 +1,6 @@
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
+var Teammate = require('../models/Teammate');
 
 
 exports.loginUser = (req, res, next) => {
@@ -40,6 +41,7 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.registerUser = (req, res) => {
+	console.log(req.body, 'this is req body in registerUser');
 	User.findOne({email: req.body.email})
 	.exec()
 	.then(user => {
@@ -55,9 +57,25 @@ exports.registerUser = (req, res) => {
 				password: req.body.password,
 			}
 			User.create(newUser, (err, user) => {
-				console.log(user, 'registered user');
-				if(!err) return res.json({
+				console.log(user, 'this is registered user');
+				if(err) return res.status(500).json({
+					success: false,
+					message: 'Server Error'
+				})
+				if(user && req.body.isInvited) {
+					Teammate.findOneAndUpdate({teammateEmail: req.body.email}, {isVerified: req.body.isInvited}, (err, updatedTeammate) => {
+						if(err) return res.status(500).json({
+							success: false,
+							message: 'Unable to update the invited Teammate!'
+						})
+						if(updatedTeammate) return res.status(200).json({
+							success: true,
+							message: 'Invited teammate registered successfully'
+						})
+					})
+				} else return res.json({
 					success: true,
+					message: 'registration successfull'
 				});
 			});
 		}

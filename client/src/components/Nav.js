@@ -7,7 +7,7 @@ class Nav extends React.Component {
   handleClick = (e) => {
     localStorage.removeItem('token');
     window.location.reload(); 
-    <Redirect to="/"/>
+    <Redirect to="/" />
   }
 
 
@@ -17,30 +17,25 @@ class Nav extends React.Component {
     if(token !== 'undefined' && token){
       return (
         <div>
-          <ul className="main__nav">
-            <li className="main__navlist--item1">
-              <Link to="/" className="nav__links">Home</Link>
-              <Link to="/users/org" className="nav__links">Create</Link>
-              <button className="ui button" onClick={this.handleClick}>logout</button>
+          <ul className="navbar is-danger">
+            <li className='navbar-start'>
+              <p className='logo-name'>altify</p>
             </li>
             <li>
               {/* {this.props.userData} */}
             </li>
+            <button className="button navbar-end" onClick={this.handleClick}>logout</button>
           </ul>
         </div>
     )
-  }else {
+  } else {
     return (
       <div>
-        <ul className="main__nav">
-          <li className="main__navlist--item1">
-            <Link to="/users/login" className="nav__links">Login</Link>
-          </li>
-          <li className="main__navlist--item2">
-            <Link to="/users/register" className="nav__links">Register</Link>
-          </li>
-          <li>
-          <Link to="/" className="nav__links">Home</Link>
+        <ul className="navbar is-danger">
+          <li className="navbar-item">
+            <Link to="/users/login" className="button">Login</Link>
+            <Link to="/users/register" className="button bg-primary">Sign up</Link>
+          {/* <Link to="/" className="navar">Home</Link> */}
           </li>
         </ul>
       </div>

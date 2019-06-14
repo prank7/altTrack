@@ -2,11 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-const messageStyle = {
-  color: 'blue',
-};
-
-
 class Teammate extends React.Component {
 	constructor(props) {
 		super(props);
@@ -50,14 +45,18 @@ class Teammate extends React.Component {
 	render() {
 		return (
 			<>
-				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="ui inverted form form_create">
-					<input value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
-					<p style={messageStyle}>
-					{
-						this.state.inviteConfirmMessage ? this.state.inviteConfirmMessage : null
-					}
-					</p>
-					<input type='submit' value='Send Invitation' />
+				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="columns">
+					<div className="column is-half">
+						<div className='column is-half'>
+							<input className='input' value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
+							
+							{
+								this.state.inviteConfirmMessage ? <p className='notification-text'>{this.state.inviteConfirmMessage}</p>: null
+							}
+
+							<input className='button bg-primary' type='submit' value='Send Invitation' />
+						</div>
+					</div>
 				</form>
 			</>
 		)

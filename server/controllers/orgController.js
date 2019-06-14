@@ -98,19 +98,19 @@ exports.sendInvites = (req, res, next) => {
 					});
 				});
 			}
-			//if teammate not exists in DB;
+			//if teammate does NOT exist in DB;
 			if(!teammate) {
 				Teammate.create(newTeammate, (err, invitedTeammate) => {
 					if(err) return res.status(500).json({
 						success: false,
-						message: 'Unexpected error encountered while creating newTeammate.'
+						message: 'Server error encountered while creating newTeammate.'
 					})
 					if(invitedTeammate) {
 						//send email for validation
 						mailOptions = {
 							to: teammateEmail,
 							subject: "You've been invited to join altify organization",
-							html: `Hello, <br>Please <a href='${link}'>click here</a> to join the altify organization.`
+							html: `Hello, <br>You've been invited to join an organization on altify.<br><br>Please <a href='${link}'>click here</a> to join.<br><br>Regards,<br>altify`
 						}
 						smtpTransport.sendMail(mailOptions, (err, info) => {
 							if (err) return res.status(406).json({ error: "Encountered a problem while sending the invitation email" });

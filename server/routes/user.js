@@ -12,7 +12,7 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/register/verify/:id', (req, res) => {
-	console.log(req.params.id);
+	// console.log(req.params.id);
 	Teammate.findOne({refCode: req.params.id})
 	.exec()
 	.then(foundTeammate => {
@@ -20,13 +20,13 @@ router.get('/register/verify/:id', (req, res) => {
 			success: false,
 			message: 'Invited User Not Found!'
 		})
-		console.log(foundTeammate, 'this was foundTeammate');
 		if(foundTeammate) return res.status(200).json({
 			success: true,
 			foundTeammate
 		})
 	})
 })
+
 
 //render login page
 router.get('/login', (req, res) => {

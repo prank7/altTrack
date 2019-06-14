@@ -1,280 +1,88 @@
-/* CSS Resets */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+//Homepage styles
+
+.home-bg-split-left {
+	background-color: #F4494B;
+	height: 100vh;
+
 }
 
-/* Main CSS */
-:root {
-	--bg-primary: #4e5266;
-	--bg-secondary: #575B72;
-	--color-primary: #4cabb1;
-	--color-secondary: #69c7ad;
-	--color-tertiary: #fed586;
-	--font: 'Raleway', sans-serif;
-	--text-color: #434b56;
-	--heading-color: #fff;
-	font-size: 16px;
-}
-body {
-	font-family: var(--font);
-	line-height: 1.5;
-	color: var(--text-color);
-}
-
-
-/********** Base CSS *************/
-*, *:before, *:after {
-	box-sizing: border-box;
-}
-a {
-	text-decoration: none;
-	color: #00B7FF;
-}
-button {
-	border: 0;
-	cursor: pointer;
-}
-button:focus {
-	outline: 0;
-}
-input {
-	border: 0;
-	margin: 0;
-}
-input:focus {
-	outline: 0;
-}
-/** Heading Elements **/
-h1 {
-	font-size: 3rem;
-	font-weight: 700;
-}
-h2 {
-	font-size: 2.5rem;
-	font-weight: 700;
-}
-h3 {
-	font-size: 2rem;
-	font-weight: 700;
-}
-h4 {
-	font-size: 1.5rem;
-	font-weight: 700;
-}
-h5 {
-	font-size: 1rem;
-	font-weight: 700;
-}
-h6 {
-	font-size: 0.8rem;
-	font-weight: 700;
-}
-.float-left {
-	float: left;
-}
-.float-right {
-	float: right;
-}
-.capitalize {
-	text-transform: capitalize;
-}
-.uppercase {
-	text-transform: uppercase;
-}
-.text-center {
-	text-align: center;
-}
-.text-left {
-	text-align: left;
-}
-.text-right {
-	text-align: right;
-}
-.img-responsive {
-	width: 100%;
-}
-/** clearfix **/
-.clearfix:before, .clearfix:after {
-	content: '';
-	display: table;
-}
-.clearfix:after {
-	clear: both;
-}
-.clearfix {
-	*zoom: 1;
-}
-
-//AltTrack Styles
-
-
-.heading__homepage--1{
-  // refactor with mixin and variables
-  display: flex;
-  justify-content: flex-end;
-  margin: 0;
-  transform: translate(2.1rem,1rem);
-  letter-spacing: 3px;
-  font-family: 'Maiden Orange', cursive;
-}
-
-.main__nav{
-  // refactor with mixin and variables
-  display: flex;
-  letter-spacing: 1px;
-  font-family: 'Maiden Orange', cursive;
-}
-
-.main__navlist--item1,
-.main__navlist--item2{
-    list-style-type: none;
-}
-.nav__links{
-  color: black;
-  padding: 1rem;
-  text-decoration: none;
-}
-.nav__links:hover{ 
-  color: mediumvioletred;
-}
-.heading__homepage--2{
-  text-align: center;
-  letter-spacing: 2px;
-  font-family: 'Gloria Hallelujah', cursive;
-}
-.pencil{
-  font-size: 2rem;
-  display: inline-block;
-  transform: rotate(90deg);
-}
-.update--text{
-  display: inline-block;
-  transform: translateY(.4rem);
-  font-size: 2.5rem;
-}
-.heading__background--1{
-  background-color: cadetblue;
-	width: 50%;
-	float: left;
-  height: 99.9vh;
-}
-.heading__background--2{
-  float: right;
-	width: 50%;
+.flex {
 	display: flex;
-	justify-content: center;
-}
-.heading__homepage--2{
-	display: inline-block;
-  vertical-align: middle;
-  line-height: 14;
+	align-items: center;
 }
 
-.register{
-	background: yellowgreen;
+.bg-primary {
+	background-color: #F4494B !important;
+	color: #fff !important;
 }
 
-.login{
-	background: cornflowerblue;
+.home-text-right {
+	font-size: 24px;
+	margin: 15px;
 }
 
-.form__signup,
-.form__login{
-	position: relative;
-	top: 0;
-	left:0;
-	transform: translate(0%,30%);
-	margin: 0 auto;
-	padding: 1rem;
-	border: 1px solid rgba(0,0,0,.2);
-	border-radius: 5px;
-	width: 50%;
-	box-shadow: 2px 3px 15px rgba(0,0,0,.3),-2px -3px 15px rgba(0,0,0,.3);
+.home-text-left {
+	font-size: 20px;
+	color: #fff;
+	font-weight: 500;
+	margin-left: 10px;
 }
 
-.form__login{
-	transform: translate(0%,40%);
+.home-icons {
+	font-size: 28px;
+	color: #fff;
+	margin: 8px;
 }
 
-//Temporary.
-.org-list {
-	display: flex;
+.join {
+	font-size: 20px;
+	
 }
+
+.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//Register Form Styles
+
+
+.register-login-text {
+	font-size: 14px;
+	margin-left: 10px;
+	justify-content: flex-end;
+}
+
+.register-login-text p {
+	margin-left: 10px;
+}
+
+
+//Landing Styles
+
+.logo-name {
+	font-size: 28px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+//Organization List Styles
 
 .org-list-container {
-	.org-box {
-		border: 1px solid palevioletred;
-	}
-}
-
-.mygrid {
-	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 5px;
-}
-
-.myflex {
-	display: flex;
-	justify-content: space-around;
-}
-
-.org-details-container {
-	border: 1px solid;
-	
+	padding: 10px;
 	h3 {
-		text-align: center;
-		background: palevioletred;
-	}
-}
-
-.org-details {
-	display: flex;
-
-	p {
-		margin-left: 5px;
-	}
-
-	:last-child {
+		font-size: 18px;
 		font-weight: bold;
 	}
+}
+
+//Org Details page
+.notification-text {
+	color: #F4494B;
 }

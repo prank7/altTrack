@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link,withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { registerAction } from '../store/actions/Action';
 import Nav from './Nav';
@@ -21,7 +21,7 @@ class Register extends React.Component {
 	componentDidMount = () => {
 		const {ref} = queryString.parse(location.search);
 		if(ref) {
-			fetch(`http://localhost:8000/users/register/verify/${ref}`)
+			fetch(`http://localhost:8000/api/v1/users/register/verify/${ref}`)
 			.then(res => res.json())
 			.then(({foundTeammate: {teammateEmail}}) => {
 				this.setState(state => ({
@@ -37,7 +37,6 @@ class Register extends React.Component {
 		e.preventDefault();
 		this.props.dispatch(registerAction(this.state));
 		this.props.history.push('/users/login')
-
 	}
 
 	handleChange = (e) => {
@@ -52,22 +51,69 @@ class Register extends React.Component {
 	render() {
 		return(
 			<>
-				<Nav/>
-				<div className="register">
-					<form className="form__signup ui  form" onSubmit={(e)=>this.handleSubmit(e)}>
-					<div className="field">
-					<label>name:</label>
-					<input value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name"/><br/>
+				<div className="register columns is-centered">
+					<div className="column home-bg-split-left parent">
+						{/* <Nav/> */}
+						<div className='child'>
+							<div className='flex'>
+								<i class="fas fa-search home-icons"></i>
+								<p className='home-text-left'>Create your organization.</p>
+							</div>
+							<div className='flex'>
+								<i class="fas fa-users home-icons"></i>
+								<p className='home-text-left'>Add teams and invite teammates.</p>
+							</div>
+							<div className='flex'>
+								<i class="fas fa-crosshairs home-icons"></i>
+								<p className='home-text-left'>Keep track of your team's progress.</p>
+							</div>
+						</div>
 					</div>
-					<div className="field">
-					<label>email:</label>
-					<input disabled={this.state.isInvited} value={this.state.email || ''} onChange={(e) => this.handleChange(e)} type="email" name="email" /><br/><br/>
-					</div>
-					<div className="field">
-					<label>password:</label>
-						<input value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password"/><br/><br/>
-					</div>
-					<button className="ui button" type="submit">Signup</button>
+					<form className="form column" onSubmit={(e)=>this.handleSubmit(e)}>
+						<div className="column is-half">
+
+							<div className="field">
+								<label className='label'>name:</label>
+								<p class="control has-icons-left has-icons-right">
+									<input className='input' value={this.state.name} onChange={(e) => this.handleChange(e)} type="text" name="name" placeholder="e.g Alex Smith"/>
+									<span class="icon is-small is-left">
+										<i class="fas fa-user"></i>
+									</span>
+									<span class="icon is-small is-right">
+										<i class="fas fa-check"></i>
+									</span>
+								</p>
+							</div>
+
+							<div className="field">
+								<label className='label'>email:</label>
+								<p class="control has-icons-left has-icons-right">
+
+									<input className='input' disabled={this.state.isInvited} value={this.state.email || ''} onChange={(e) => this.handleChange(e)} type="email" name="email" placeholder="e.g. alexsmith@gmail.com" />
+									<span class="icon is-small is-left">
+										<i class="fas fa-envelope"></i>
+									</span>
+									<span class="icon is-small is-left">
+										<i class="fas fa-envelope"></i>
+									</span>
+								</p>
+							</div>
+
+							<div className="field">
+								<label className='label'>password:</label>
+								<input className='input' value={this.state.password} onChange={(e) => this.handleChange(e)} type="password" name="password" placeholder='minimum 6 digits'/>
+							</div>
+							{
+								this.state.name && this.state.email && this.state.password ? 
+								<button className="button bg-primary" type="submit">Signup</button> : null
+							}
+							<p className='flex register-login-text'>
+								Already have an account?
+								<Link to="/users/login">
+									<p>Login</p>
+								</Link>
+							</p>
+						</div>
 					</form>
 				</div>
 			</>

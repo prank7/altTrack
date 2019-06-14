@@ -26,6 +26,9 @@ class OrganizationList extends Component {
           <div className='org-list-container'>
             <h3>Organizations</h3>
             {
+              !orgList.length ? <p>There are no organizations to show.</p> : null
+            }
+            {
               orgList && orgList.map(elm => {
                 return (
                   <>

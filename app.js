@@ -43,9 +43,6 @@ app.use(
 );
 
 app.use(cookieParser());
-// app.get('/api/secret', withAuth, function(req, res) {
-//   res.send('The password is potato');
-// });
 
 
 
@@ -58,9 +55,6 @@ if (process.env.NODE_ENV === "development") {
   require("webpack-dev-middleware")(compiler, {
    noInfo: true,
    publicPath: webpackConfig.output.publicPath,
-   historyApiFallback:{
-     index:'/dist/bundle/index.html'
-   }
   })
  );
 
