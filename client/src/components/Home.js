@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
-import rocketship from "./../rocketship.svg";
+
 
 class Home extends React.Component {
 	render() {
@@ -29,6 +29,8 @@ class Home extends React.Component {
           <div className='column is-half child'>
             <p className='has-text-weight-semibold home-text-right'>See what's happenning in your organization right now</p>
             <p className='has-text-weight-bold home-text-right join'>Join Altify today.</p>
+            <Link to="/users/login" className="button">Login</Link>
+            <Link to="/users/register" className="button bg-primary">Sign up</Link>
           </div>
         </div>
       </div>

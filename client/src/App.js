@@ -7,6 +7,7 @@ import Organization from './components/Organization';
 import Teammate from './components/Teammate';
 import OrgDetails from './components/OrgDetails';
 import Landing from './components/Landing';
+// import Footer from './components/Footer';
 
 import {
   BrowserRouter as Router,
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/landing" component={Landing}/>
 
         </Switch>
+        {/* <Footer /> */}
       </div>
     </Router>
     );

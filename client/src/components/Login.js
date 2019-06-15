@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { loginAction } from '../store/actions/Action';
-import Nav from './Nav';
 
-const API = 'http://localhost:8000/api/v1';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -18,7 +16,7 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.dispatch(loginAction(this.state));
-		this.props.token ? this.props.history.push("/users/org") : this.props.history.push('/users/register');
+		this.props.token ? this.props.history.push("/landing") : this.props.history.push('/users/register');
 	}
 
 	handleChange = (e) => {
@@ -30,9 +28,8 @@ class Login extends React.Component {
 	render() {
 		return (
 			<>
-				<div className="columns is-centered">
+				<div className="columns is-desktop is-vcentered">
 					<div className="column home-bg-split-left parent">
-						{/* <Nav/> */}
 						<div className='child'>
 							<div className='flex'>
 								<i class="fas fa-search home-icons"></i>

@@ -46,18 +46,22 @@ class Teammate extends React.Component {
 		return (
 			<>
 				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="columns">
-					<div className="column is-half">
-						<div className='column is-half'>
-							<input className='input' value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
-							
+					<div className="column is-half teammate-page-left">
+						<div className='flex invite-input'>
+							<input className='input ' value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
 							{
-								this.state.inviteConfirmMessage ? <p className='notification-text'>{this.state.inviteConfirmMessage}</p>: null
+								this.state.teammateEmail ? 
+								<input className='button bg-primary' type='submit' value='Invite' /> : null
 							}
-
-							<input className='button bg-primary' type='submit' value='Send Invitation' />
+							
 						</div>
 					</div>
 				</form>
+				<div>
+					{
+						this.state.inviteConfirmMessage ? <p className='notification-text'>{this.state.inviteConfirmMessage}</p>: null
+					}
+				</div>
 			</>
 		)
 	}

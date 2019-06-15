@@ -32,14 +32,17 @@ class OrganizationList extends Component {
               orgList && orgList.map(elm => {
                 return (
                   <>
-                    <div className='org-box'>
-                      <span>
-                        <p>Org Name: </p>
-                      </span>
-                      <Link to={`/users/org/${elm._id}`}>
-                        <div>{elm.name}</div>
-                      </Link>
+                    <div className='icard'>
+                      <div className='icard-image flex'>
+                        <i className="fas fa-users"></i>
+                        <div className='icard-content'>
+                          <Link to={`/users/org/${elm._id}`}>
+                            <div>{elm.name}</div>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
+                      
                   </>
                 )
               })

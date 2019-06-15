@@ -17,14 +17,14 @@ class Nav extends React.Component {
     if(token !== 'undefined' && token){
       return (
         <div>
-          <ul className="navbar is-danger">
+          <ul className="navbar">
             <li className='navbar-start'>
               <p className='logo-name'>altify</p>
             </li>
             <li>
               {/* {this.props.userData} */}
             </li>
-            <button className="button navbar-end" onClick={this.handleClick}>logout</button>
+            <button className="button navbar-end log-out-button" onClick={this.handleClick}>logout</button>
           </ul>
         </div>
     )
@@ -35,7 +35,6 @@ class Nav extends React.Component {
           <li className="navbar-item">
             <Link to="/users/login" className="button">Login</Link>
             <Link to="/users/register" className="button bg-primary">Sign up</Link>
-          {/* <Link to="/" className="navar">Home</Link> */}
           </li>
         </ul>
       </div>

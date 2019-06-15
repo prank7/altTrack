@@ -51,7 +51,7 @@ class Register extends React.Component {
 	render() {
 		return(
 			<>
-				<div className="register columns is-centered">
+				<div className="register columns is-desktop is-vcentered">
 					<div className="column home-bg-split-left parent">
 						{/* <Nav/> */}
 						<div className='child'>

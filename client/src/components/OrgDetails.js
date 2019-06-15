@@ -27,23 +27,23 @@ class OrgDetails extends React.Component {
 			<>
 				<Nav />
 				<section className='columns'>
-					<div className='column is-half'>
-						<h3 className="title is-5 is-spaced">Organization Details</h3>
+					<div className='column is-half org-details'>
+						<h3 className="is-4 is-spaced org-details-heading">Organization Details</h3>
 						{
 						this.state.org ? (
 							<>
 							<div className='org-details-sub-container'>
 								<span className='org-details flex'>
-									<p className='subtitl '>Name: </p>
-									<p className='subtitl'> {this.state.org.name}</p>
+									<p className='org-text-label'>Name: </p>
+									<p className='org-text-data'> {this.state.org.name}</p>
 								</span>
 								<span className='org-details flex'>
-									<p className='subtitl'>Location: </p>
-									<p className='subtitl'> {this.state.org.location}</p>
+									<p className='org-text-label'>Location: </p>
+									<p className='org-text-data'> {this.state.org.location}</p>
 								</span>
 								<span className='org-details flex'>
-									<p className='subtitl'>Created by: </p>
-									<p className='subtitl'> {this.state.org.creator.name}</p>
+									<p className='org-text-label'>Created by: </p>
+									<p className='org-text-data'> {this.state.org.creator.name}</p>
 								</span>
 							</div>
 							</>
@@ -53,9 +53,9 @@ class OrgDetails extends React.Component {
 						<Teammate data={this.state.org}/>
 					</div>
 					<div className='column is-half'>
-						<p>Teammates</p>
+						<p className='teammates-list-heading'>Teammates</p>
 						{
-							this.state.teammate === undefined ? null : <p>No teammates added yet!</p>
+							this.state.teammate.length === 0  ? <p>No teammates added yet!</p> : null
 						}
 						{
 							this.state.teammate && this.state.teammate.map(teammate => 

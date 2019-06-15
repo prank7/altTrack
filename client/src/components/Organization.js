@@ -70,17 +70,20 @@ import { getOrgList } from '../store/actions/Action';
           <div className='column is-6'>
             <div className="five wide field">
               <label className='label'>Create Organization</label>
-              <input className='input' type="text" value={this.state.orgName} onChange={this.changeOrgName} />
+              <input className='input' type="text" value={this.state.orgName} onChange={this.changeOrgName} placeholder='org name'/>
             </div>
             <div className="five wide field">
-              <label className='label'>location</label>
-              <input className='input' type="text" value={this.state.location} onChange={this.handleLocation} />
+              {/* <label className='label'>location</label> */}
+              <input className='input' type="text" value={this.state.location} onChange={this.handleLocation} placeholder='location' />
             </div>
             <div className="five wide field">
               <label className='label'>upload image</label>
               <input className='input' name="file" onChange={this.onChangeHandler}  type="file"/>
             </div>
-            <button type="submit" className="button bg-primary">Create</button>
+            {
+              this.state.orgName && this.state.location && this.state.selectedFile ? 
+            <button type="submit" className="button bg-primary">Create</button> : null
+            }
           </div>
         </form>
         <div className='column is-half'>

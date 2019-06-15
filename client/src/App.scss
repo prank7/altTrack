@@ -70,6 +70,7 @@
 	font-size: 28px;
 	font-weight: bold;
 	margin-left: 10px;
+	color: #fff;
 }
 
 //Organization List Styles
@@ -77,12 +78,95 @@
 .org-list-container {
 	padding: 10px;
 	h3 {
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: bold;
 	}
+
+	.icard {
+		width: 100px;
+		margin-top: 20px;
+		
+		.icard-image {
+			.fa-users {
+				font-size: 20px;
+			}
+			div {
+				margin-left: 5px;
+			}
+		}
+	}
+
 }
 
 //Org Details page
 .notification-text {
 	color: #F4494B;
+	margin-left: 10px;
+}
+
+.org-details {
+	h3 {
+		padding: 10px;
+	}
+}
+
+.org-details-sub-container {
+	span {
+		padding: 10px;
+	}
+
+	.org-text-label {
+		color: rgb(184, 182, 182);
+	}
+
+	.org-text-data {
+		margin-left: 10px;
+	}
+}
+
+.teammates-list-heading {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.org-details-heading {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+//Teammate page Styles
+
+.teammate-page-left {
+	margin: 10px;
+}
+
+//nav bar styles
+
+.navbar {
+	// vertical-align: baseline !important;
+	background-color: #F4494B !important;
+}
+
+.log-out-button {
+	margin: 5px;
+}
+
+//footer styles
+
+.footer-custom {
+	position: fixed;
+	bottom: 0;
+	
+
+	.fa-heart {
+		font-size: 14px;
+		color: #F4494B;
+	}
+
+	.made-love {
+		a {
+			color: #30ba67;
+		}
+	}
 }
