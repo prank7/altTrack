@@ -9,6 +9,10 @@ router.get('/landing', (err, res) => {
   res.render('index');
 });
 
+router.get('/posts', (err, res) => {
+  res.render('index');
+})
+
 
 module.exports = router;
 

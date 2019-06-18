@@ -16,7 +16,7 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.dispatch(loginAction(this.state));
-		this.props.token ? this.props.history.push("/landing") : this.props.history.push('/users/register');
+		localStorage.getItem('token') ? this.props.history.push("/landing") : this.props.history.push('/users/login');
 	}
 
 	handleChange = (e) => {
@@ -26,21 +26,22 @@ class Login extends React.Component {
 	}
 
 	render() {
+
 		return (
 			<>
 				<div className="columns is-desktop is-vcentered">
 					<div className="column home-bg-split-left parent">
 						<div className='child'>
 							<div className='flex'>
-								<i class="fas fa-search home-icons"></i>
+								<i className="fas fa-search home-icons"></i>
 								<p className='home-text-left'>Create your organization.</p>
 							</div>
 							<div className='flex'>
-								<i class="fas fa-users home-icons"></i>
+								<i className="fas fa-users home-icons"></i>
 								<p className='home-text-left'>Add teams and invite teammates.</p>
 							</div>
 							<div className='flex'>
-								<i class="fas fa-crosshairs home-icons"></i>
+								<i className="fas fa-crosshairs home-icons"></i>
 								<p className='home-text-left'>Keep track of your team's progress.</p>
 							</div>
 						</div>
@@ -50,13 +51,13 @@ class Login extends React.Component {
 
 							<div className="field">
 								<label className='label'>email</label>
-								<p class="control has-icons-left has-icons-right">
+								<p className="control has-icons-left has-icons-right">
 									<input className='input' value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email' />
-									<span class="icon is-small is-left">
-										<i class="fas fa-envelope"></i>
+									<span className="icon is-small is-left">
+										<i className="fas fa-envelope"></i>
 									</span>
-									<span class="icon is-small is-left">
-										<i class="fas fa-envelope"></i>
+									<span className="icon is-small is-left">
+										<i className="fas fa-envelope"></i>
 									</span>
 								</p>
 							</div>
@@ -69,11 +70,11 @@ class Login extends React.Component {
 								this.state.email && this.state.password ? 
 								<button className="button bg-primary" type='submit'>Log in</button> : null
 							}
-							<p className='flex register-login-text'>Don't have account?
+							<div className='flex register-login-text'>Don't have account?
 								<Link to="/users/register">
 									<p>Sign up</p>
 								</Link>
-							</p>
+							</div>
 						</div>
 					</form>
 				</div>

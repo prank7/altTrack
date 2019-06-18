@@ -33,8 +33,8 @@ class Nav extends React.Component {
       <div>
         <ul className="navbar is-danger">
           <li className="navbar-item">
-            <Link to="/users/login" className="button">Login</Link>
-            <Link to="/users/register" className="button bg-primary">Sign up</Link>
+            {/* <Link to="/users/login" className="button">Login</Link>
+            <Link to="/users/register" className="button bg-primary">Sign up</Link> */}
           </li>
         </ul>
       </div>

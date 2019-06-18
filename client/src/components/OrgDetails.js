@@ -18,7 +18,7 @@ class OrgDetails extends React.Component {
 		.then(res => res.json())
     .then(data => {
 			console.log(data, 'data in orgDetails Fetch');
-			this.setState({org: data.org, teammate: data.teammate})
+			this.setState({org: data.org, teammate: data.teammate});
     })
 	}
 

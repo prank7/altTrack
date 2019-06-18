@@ -11,15 +11,15 @@ class Home extends React.Component {
 				<div className="column home-bg-split-left parent">
           <div className='child'>
             <div className='flex'>
-              <i class="fas fa-search home-icons"></i>
+              <i className="fas fa-search home-icons"></i>
               <p className='home-text-left'>Create your organization.</p>
             </div>
             <div className='flex'>
-              <i class="fas fa-users home-icons"></i>
+              <i className="fas fa-users home-icons"></i>
               <p className='home-text-left'>Add teams and invite teammates.</p>
             </div>
             <div className='flex'>
-              <i class="fas fa-crosshairs home-icons"></i>
+              <i className="fas fa-crosshairs home-icons"></i>
               <p className='home-text-left'>Keep track of your team's progress.</p>
             </div>
           </div>

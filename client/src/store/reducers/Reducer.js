@@ -1,21 +1,23 @@
 const initState = {
-  userData : {},
-  token: localStorage.getItem('token') || '',
-  creatorId: localStorage.getItem('id') || '',
+  userId : '',
+  token: '',
+  creatorId: '',
   orgList: []
 };
 
 export default function rootReducer(state = initState,action) {
   switch(action.type) {
-    case "SIGNUP_SUCESS": {
+    case "SIGNUP_SUCCESS": {
       return state;
     }
-    case "LOGIN_SUCESS": {
+    case "LOGIN_SUCCESS": {
+      console.log(state, 'this is state', action, 'login success action');
+      localStorage.setItem('token', JSON.stringify(action.data.token))
       return {
         ...state,
-        userData : action.data,
-        creatorId: localStorage.setItem('id',action.data.userId),
-        token: localStorage.setItem('token',action.data.token)
+        userId : action.data.userId,
+        creatorId: action.data.userId,
+        token: action.data.token
       }
     }
     case "ORGANIZATIONS": {
@@ -32,13 +34,19 @@ export default function rootReducer(state = initState,action) {
         orgList : action.payload.orgsFound
       }
     }
-    // case "GET_INDIVIDUAL_ORG_INFO": {
-    //   console.log(state, action, "request coming in Reducer GET INDIVIDUAL ORG INFO");
-    //   return {
-    //     ...state,
-    //     individualOrg: action.payload
-    //   }
-    // }
+    case "SAVE_POSTS": {
+      return {
+        ...state,
+        posts: action.payload,
+      }
+    }
+    case "GET_USER_POSTS": {
+      console.log(state, action,'request coming in Reducer GET USER POSTS');
+      return {
+        ...state,
+        userPosts: action.payload,
+      }
+    }
   default:
     return state;
   }

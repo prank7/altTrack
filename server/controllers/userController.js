@@ -1,12 +1,11 @@
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
 var Teammate = require('../models/Teammate');
+var Post = require('../models/Post');
 
 
 exports.loginUser = (req, res, next) => {
-	// console.log(req.body, 'this is body');
 	User.findOne({email: req.body.email}, (err, user) => {
-		// console.log(err, user, 'this is freaking user found in DB');
 		if(err) return  res.status(500).json({
 			success: false,
 			message: 'encountered error',
@@ -14,17 +13,16 @@ exports.loginUser = (req, res, next) => {
 		if(!user) return res.status(400).send('User NOT found. Please try again!');
 
 		user.comparePassword(req.body.password, (err, isMatch) => {
-			// console.log(err, isMatch);
 			if(err) return res.status(500).next(err);
 			if(!isMatch) return res.status(400).send('Incorrect Password. Please try again!');
-			// console.log(user, 'this is user within ComparePassword');
+
 			const token = jwt.sign({
 				email: user.email,
 				userId: user._id,
 			},
 			'thisisfreakingawesome',
 			{
-				expiresIn: "1h"
+				expiresIn: "12h"
 			}
 			);
 
@@ -82,11 +80,49 @@ exports.registerUser = (req, res) => {
 	});
 }
 
-// exports.user = (req,res) => {
-// 	User.findById(req.params.id,{ password : 0 },(err,data) => {
-// 		if(err){
-// 			res.status(404).send({message: "user not found"})
-// 		}
-// 		res.send(data);
-// 	})
-// }
+exports.verifyToken = (req, res, next) => {
+	var token = req.headers.authorization.split(' ')[1];
+	console.log(token, 'thisis verifyToken');
+	jwt.verify(token, 'thisisfreakingawesome', (err, decoded) => {
+		if(err) return res.status(500).json(err);
+		console.log(decoded, 'this is decoded');
+		if(decoded) {
+			req.headers.user = decoded;
+			console.log(req.headers.user, 'this is headers.user');
+			next();
+		}
+	})
+}
+
+exports.savePosts = (req, res) => {
+	var newPost = {
+		didToday: req.body.didToday,
+		learnedToday: req.body.learnedToday,
+		user: req.headers.user.userId,
+	}
+
+	Post.create(newPost, (err, post) => {
+		if(err) res.status(500).json({
+			success: false,
+			message: 'Unable to create Post. Server Error.'
+		})
+
+		if(post) {
+			User.findOneAndUpdate({_id: req.headers.user.userId}, {$push: {posts: post._id}})
+			.exec((err, updatedUser) => {
+				console.log(updatedUser, 'thisis updatedUser');
+
+				if(err) return res.status(500).json(err);
+
+				if(updatedUser) res.status(200).json({
+					success: true,
+					message: 'Post created successfully',
+				})
+			})
+		}
+	});
+}
+
+exports.userposts = (req, res) => {
+
+}

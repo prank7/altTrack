@@ -18,7 +18,6 @@ var storage = multer.diskStorage({
 	filename: function (req, file, cb) {
 		//ensure the fileName is not repeated. So, added Date.now()
 		cb(null, Date.now() + '-' + file.originalname)
-		// console.log(file, 'this is inside fileName under Storage');
 	}
 })
 
@@ -31,10 +30,16 @@ router.post('/users/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 
 //CreateOrg page submit
-router.post('/users/org',upload.single('file'), orgController.createOrg);
+router.post('/users/org', userController.verifyToken, upload.single('file'), orgController.createOrg);
 
 router.post('/users/org/invite', orgController.sendInvites);
 
-router.use('/users', userRouter);
+router.post('/users/posts', userController.verifyToken, userController.savePosts)
+
+router.get('/users/verify', userController.verifyToken)
+
+router.get('/users/posts', userController.userposts)
+
+// router.use('/users', userRouter);
 
 module.exports = router;

@@ -12,7 +12,6 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/register/verify/:id', (req, res) => {
-	// console.log(req.params.id);
 	Teammate.findOne({refCode: req.params.id})
 	.exec()
 	.then(foundTeammate => {
@@ -23,9 +22,9 @@ router.get('/register/verify/:id', (req, res) => {
 		if(foundTeammate) return res.status(200).json({
 			success: true,
 			foundTeammate
-		})
-	})
-})
+		});
+	});
+});
 
 
 //render login page
@@ -39,7 +38,7 @@ router.get('/org', (req, res) => {
 
 router.get('/org/invite', (req, res) => {
 	res.render('index');
-})
+});
 
 //gets list of all existing oranizations
 router.get('/orglist', (req, res) => {
@@ -69,11 +68,13 @@ router.get('/org/:id', (req, res) => {
 					success: true,
 					org,
 					teammate
-				})
-			})
+				});
+			});
 		}
-	})
-})
+	});
+});
+
+
 
 module.exports = router;
 	
