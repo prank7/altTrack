@@ -95,6 +95,7 @@ exports.verifyToken = (req, res, next) => {
 }
 
 exports.savePosts = (req, res) => {
+	//Saving info on new variable to save in DB. The keys matches with Keys in Schema.
 	var newPost = {
 		didToday: req.body.didToday,
 		learnedToday: req.body.learnedToday,

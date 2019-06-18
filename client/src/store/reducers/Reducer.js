@@ -12,7 +12,9 @@ export default function rootReducer(state = initState,action) {
     }
     case "LOGIN_SUCCESS": {
       console.log(state, 'this is state', action, 'login success action');
-      localStorage.setItem('token', JSON.stringify(action.data.token))
+
+      localStorage.setItem('token', JSON.stringify(action.data.token));
+      
       return {
         ...state,
         userId : action.data.userId,
