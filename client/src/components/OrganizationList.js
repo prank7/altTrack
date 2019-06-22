@@ -19,7 +19,7 @@ class OrganizationList extends Component {
 
   render() {
     const {orgList} = this.props;
-    // console.log(orgList, 'this is OrgLIST in Props');
+    // console.log(orgList, 'this is OrgLIST in Props', this.props);
     return (  
       <>
         <section >

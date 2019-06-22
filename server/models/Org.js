@@ -19,7 +19,7 @@ var orgSchema = new Schema({
 	},
 	location: {
 		type: String,
-	}
+	},
 }, {timestamps: true})
 
 var Org = mongoose.model('Org', orgSchema);

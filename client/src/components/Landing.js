@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from './Nav';
 import Organization from './Organization';
+import Footer from './Footer';
 
 class Landing extends React.Component {
 	render() {
@@ -8,6 +9,8 @@ class Landing extends React.Component {
 			<>
 				<Nav />
 				<Organization />
+				<Footer />
+
 			</>
 		)
 	}

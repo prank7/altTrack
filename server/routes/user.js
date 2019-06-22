@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const withAuth = require('../middleware');
 var Org = require('../models/Org');
 var Teammate = require('../models/Teammate');
 
@@ -26,30 +25,37 @@ router.get('/register/verify/:id', (req, res) => {
 	});
 });
 
-
 //render login page
 router.get('/login', (req, res) => {
 	res.render('index');
 });
 
+//get org page
 router.get('/org', (req, res) => {
 	res.render('index');
 });
 
+//render teammate invite box
 router.get('/org/invite', (req, res) => {
 	res.render('index');
 });
 
 //gets list of all existing oranizations
 router.get('/orglist', (req, res) => {
-	Org.find().exec().then(orgsFound => {
-		if(orgsFound) return res.status(200).json({
-			success:true,
-			orgsFound
+	// console.log(req.body, 'request coming in OrgList');
+	Org.find().exec().then((err,orgsFound) => {
+		if(err) return res.status(500).json(err);
+		if(!orgsFound) return res.status(200).json({
+			success: true,
+			message: 'There are no organizations to show.'
 		})
+		if(orgsFound) {
+			return res.status(200).json({success:true, orgsFound }); 
+		}
 	})
 })
 
+//get org details page
 router.get('/org/:id', (req, res) => {
 	Org.findOne({_id: req.params.id})
 	.populate('creator')
@@ -74,7 +80,4 @@ router.get('/org/:id', (req, res) => {
 	});
 });
 
-
-
 module.exports = router;
-	

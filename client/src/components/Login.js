@@ -15,8 +15,11 @@ class Login extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.dispatch(loginAction(this.state));
-		localStorage.getItem('token') ? this.props.history.push("/landing") : this.props.history.push('/users/login');
+		this.props.dispatch(loginAction(this.state, () => {
+			localStorage.getItem('token') ? 
+			this.props.history.push("/landing") : this.props.history.push('/users/login');
+		})
+		);
 	}
 
 	handleChange = (e) => {
@@ -29,7 +32,7 @@ class Login extends React.Component {
 
 		return (
 			<>
-				<div className="columns is-desktop is-vcentered">
+				<div className="columns is-desktop is-vcentered home-bg-split-right">
 					<div className="column home-bg-split-left parent">
 						<div className='child'>
 							<div className='flex'>
@@ -52,7 +55,7 @@ class Login extends React.Component {
 							<div className="field">
 								<label className='label'>email</label>
 								<p className="control has-icons-left has-icons-right">
-									<input className='input' value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email' />
+									<input className='input' value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email' autoComplete='email'/>
 									<span className="icon is-small is-left">
 										<i className="fas fa-envelope"></i>
 									</span>
@@ -63,8 +66,8 @@ class Login extends React.Component {
 							</div>
 								
 							<div className="field">
-								<label className='label'>password</label>
-								<input className='input' value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' placeholder='password'></input>
+								<label className='label' >password</label>
+								<input className='input' value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' placeholder='password' autoComplete='current-password' />
 							</div>
 							{
 								this.state.email && this.state.password ? 

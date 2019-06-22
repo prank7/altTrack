@@ -7,10 +7,12 @@ class Footer extends React.Component {
 			<>
 				<footer className='footer-custom'>
 					<ul className='social-links'>
-						<li></li>
+						<li><a href="https://github.com/1kvsn/altTrack" ><i className="fab fa-github"></i></a></li>
+						<li><a href="https://twitter.com/kvsn_1" ><i className="fab fa-twitter"></i></a></li>
+						<li><a href="https://www.linkedin.com/in/kvsn/" ><i className="fab fa-linkedin"></i></a></li>
 					</ul>
 
-					<p className='made-love'>Made with <i class="fas fa-heart"></i> at <a href='www.altcampus.io' >AltCampus</a></p>
+					
 				</footer>
 			</>
 		)

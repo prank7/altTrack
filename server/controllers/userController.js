@@ -2,6 +2,7 @@ var User = require('../models/User');
 var jwt = require('jsonwebtoken');
 var Teammate = require('../models/Teammate');
 var Post = require('../models/Post');
+var Org = require('../models/Org');
 
 
 exports.loginUser = (req, res, next) => {
@@ -26,7 +27,8 @@ exports.loginUser = (req, res, next) => {
 			}
 			);
 
-			console.log('login success');
+			console.log(token, 'login success');
+			// res.setHeader("token", token);
 			return res.status(200).json({
 				message: 'Auth successfull',
 				token: token,
@@ -39,7 +41,7 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.registerUser = (req, res) => {
-	console.log(req.body, 'this is req body in registerUser');
+	// console.log(req.body, 'this is req body in registerUser');
 	User.findOne({email: req.body.email})
 	.exec()
 	.then(user => {
@@ -55,7 +57,7 @@ exports.registerUser = (req, res) => {
 				password: req.body.password,
 			}
 			User.create(newUser, (err, user) => {
-				console.log(user, 'this is registered user');
+				// console.log(user, 'this is registered user');
 				if(err) return res.status(500).json({
 					success: false,
 					message: 'Server Error'
@@ -82,13 +84,13 @@ exports.registerUser = (req, res) => {
 
 exports.verifyToken = (req, res, next) => {
 	var token = req.headers.authorization.split(' ')[1];
-	console.log(token, 'thisis verifyToken');
+	// console.log(token, 'thisis verifyToken');
 	jwt.verify(token, 'thisisfreakingawesome', (err, decoded) => {
 		if(err) return res.status(500).json(err);
-		console.log(decoded, 'this is decoded');
+		// console.log(decoded, 'this is decoded');
 		if(decoded) {
 			req.headers.user = decoded;
-			console.log(req.headers.user, 'this is headers.user');
+			// console.log(req.headers.user, 'this is headers.user');
 			next();
 		}
 	})
@@ -103,19 +105,19 @@ exports.savePosts = (req, res) => {
 	}
 
 	Post.create(newPost, (err, post) => {
-		if(err) res.status(500).json({
+		if(err) return res.status(500).json({
 			success: false,
-			message: 'Unable to create Post. Server Error.'
+			message: 'Unable to create Post. Server Error.',
+			err
 		})
 
 		if(post) {
 			User.findOneAndUpdate({_id: req.headers.user.userId}, {$push: {posts: post._id}})
 			.exec((err, updatedUser) => {
-				console.log(updatedUser, 'thisis updatedUser');
+				// console.log(updatedUser, 'thisis updatedUser');
 
 				if(err) return res.status(500).json(err);
-
-				if(updatedUser) res.status(200).json({
+				if(updatedUser) return res.status(200).json({
 					success: true,
 					message: 'Post created successfully',
 				})
@@ -125,5 +127,19 @@ exports.savePosts = (req, res) => {
 }
 
 exports.userposts = (req, res) => {
-
+	// console.log('request coming for userPosts');
+	// console.log(req.params);
+	Post.find({user: req.params.id}, null, {sort: {createdAt: -1}}, (err, userPosts) => {
+		if(err) return res.status(500).json({
+			success: false,
+			message: 'Server Error',
+			err
+		})
+		if(userPosts) {
+			return res.status(200).json({
+				success: true,
+				userPosts
+			})
+		}
+	})
 }

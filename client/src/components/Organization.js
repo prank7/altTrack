@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import OrganizationList from './OrganizationList';
@@ -11,13 +11,12 @@ import { getOrgList } from '../store/actions/Action';
       selectedFile: null,
       orgName: '',
       location: '',
-      creator: localStorage.getItem('id')
+      creator: localStorage.getItem('userId')
     }
   }
   
   componentDidMount = () => {
-    // console.log("called in cdm");
-    this.props.dispatch(getOrgList())
+    this.props.dispatch(getOrgList());
   }
   
   onChangeHandler = (e) => {

@@ -1,8 +1,9 @@
 const initState = {
-  userId : '',
-  token: '',
-  creatorId: '',
-  orgList: []
+  userId : localStorage.getItem('userId') || '',
+  token: localStorage.getItem('token') || '',
+  creatorId: localStorage.getItem('userId') || '',
+  orgList: [],
+  name: localStorage.getItem('name') || '',
 };
 
 export default function rootReducer(state = initState,action) {
@@ -11,15 +12,13 @@ export default function rootReducer(state = initState,action) {
       return state;
     }
     case "LOGIN_SUCCESS": {
-      console.log(state, 'this is state', action, 'login success action');
-
-      localStorage.setItem('token', JSON.stringify(action.data.token));
-      
+      // console.log(state, 'this is state', action, 'login success action');
       return {
         ...state,
         userId : action.data.userId,
         creatorId: action.data.userId,
-        token: action.data.token
+        token: action.data.token,
+        name: action.data.name,
       }
     }
     case "ORGANIZATIONS": {
@@ -33,7 +32,7 @@ export default function rootReducer(state = initState,action) {
       // console.log(state, action,'request coming in Reducer Organizations');
       return {
         ...state,
-        orgList : action.payload.orgsFound
+        orgList : action.payload
       }
     }
     case "SAVE_POSTS": {
@@ -43,10 +42,23 @@ export default function rootReducer(state = initState,action) {
       }
     }
     case "GET_USER_POSTS": {
-      console.log(state, action,'request coming in Reducer GET USER POSTS');
+      // console.log(state, action,'request coming in Reducer GET USER POSTS');
       return {
         ...state,
-        userPosts: action.payload,
+        userPosts: action.payload.userPosts,
+      }
+    }
+    // case "GET_ORG_ID": {
+    //   return {
+    //     ...state,
+    //     orgId: action.payload._id
+    //   }
+    // }
+    case "GET_ORG_FEED": {
+      console.log(state, 'this is state', action, 'this is action');
+      return {
+        ...state,
+        orgFeed: action.payload
       }
     }
   default:

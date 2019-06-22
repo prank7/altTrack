@@ -1,6 +1,8 @@
 var Org = require('../models/Org');
 const nodemailer = require("nodemailer");
 var Teammate = require('../models/Teammate');
+var Post = require('../models/Post');
+var User = require('../models/User');
 
 exports.createOrg = (req, res, next) => {
 	Org.findOne({ name: req.body.name })
@@ -123,4 +125,53 @@ exports.sendInvites = (req, res, next) => {
 			}
 
 	});
+}
+
+exports.getOrgPosts = (req, res) => {
+	var orgId = req.params.id;
+	var userId = req.headers.userId;
+	Teammate.find({}, (err, allTeammates) => {
+		if(err) return res.status(500).json({
+			success: false,
+			err,
+		})
+		var extractedPosts = [];
+		allTeammates.forEach(teammate => {
+			User.findOne({email: teammate.teammateEmail}).populate('posts').exec((err, orgPosts) => {
+				if(err) return res.status(500).json({
+					success: false,
+					err,
+				})
+				console.log(orgPosts, 'this is orgPOSTS......');
+				orgPosts.posts.forEach(elm => {
+					extractedPosts.push(elm);
+					
+				})
+				console.log(extractedPosts.length, 'this IS LENGTHHHHHHHH')
+			})
+		})
+		console.log(extractedPosts, 'THIS IS EXTRACTED POSTS');
+
+		// if(extractedPosts.length) return res.status(200).json({
+		// 	success: true,
+		// 	extractedPosts,
+		// })
+		res.json({success: true, posts: extractedPosts});
+	})
+
+
+
+
+
+	// Post.find({org: orgId}, (err, orgPosts) => {
+	// 	if(err) return res.status(500).json({
+	// 		success: false,
+	// 		err,
+	// 	})
+	// 	console.log(orgPosts, 'this is OrgPosts ......');
+	// 	if(orgPosts) return res.status(200).json({
+	// 		success: true,
+	// 		orgPosts
+	// 	})
+	// })
 }

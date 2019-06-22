@@ -7,6 +7,10 @@
 
 }
 
+.home-bg-split-right {
+	background-color: #fff;
+}
+
 .flex {
 	display: flex;
 	align-items: center;
@@ -146,27 +150,79 @@
 .navbar {
 	// vertical-align: baseline !important;
 	background-color: #F4494B !important;
+
+	.nav-username {
+		color: #fff;
+		margin: 10px;
+	}
+
+	.nav-posts {
+		margin: 10px;
+	}
 }
+
+
 
 .log-out-button {
 	margin: 5px;
 }
 
+//Post Component Styles
+
+body {
+	background-color: #e6ecf0;
+}
+
+.post-inputs {
+	textarea {
+		width: 100%;
+		height: 60px;
+	}
+}
+
+.post {
+	background-color: #fff;
+	border-bottom: 0.5px solid lightgray;
+	padding: 5px 8px;
+
+	.post-time {
+		display: flex;
+		justify-content: flex-end;
+		color: rgb(180, 183, 184);
+		font-size: 12px;
+
+		p {
+			margin: 2px;
+		}
+	}
+
+	
+}
+
+
+
+
+
 //footer styles
 
 .footer-custom {
 	position: fixed;
+	width: 100%;
 	bottom: 0;
+	border-top: 0.5px solid #F4494B;
+	padding: 10px;
+	background-color: #fff;
 	
+	
+	.social-links {
+		display: flex;
+		justify-content: center;
 
-	.fa-heart {
-		font-size: 14px;
-		color: #F4494B;
-	}
-
-	.made-love {
 		a {
-			color: #30ba67;
+			text-decoration: none;
+			font-size: 18px;
+			margin: 10px;
+			color: #F4494B;
 		}
 	}
 }

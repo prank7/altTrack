@@ -1,7 +1,10 @@
 import React from 'react';
 import Teammate from './Teammate';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import Nav from './Nav';
+import OrgFeed from './OrgFeed';
+import {getOrgFeed} from '../store/actions/Action';
+import Footer from './Footer';
 
 class OrgDetails extends React.Component {
 	constructor(props){
@@ -17,8 +20,10 @@ class OrgDetails extends React.Component {
 		fetch(`http://localhost:8000/api/v1/users/org/${this.props.match.params.id}`)
 		.then(res => res.json())
     .then(data => {
-			console.log(data, 'data in orgDetails Fetch');
+			// console.log(data.org._id, 'data in orgDetails Fetch');
+			this.props.dispatch(getOrgFeed(data.org._id));
 			this.setState({org: data.org, teammate: data.teammate});
+			// this.props.dispatch({type: "GET_ORG_ID", payload: data.org})
     })
 	}
 
@@ -43,7 +48,7 @@ class OrgDetails extends React.Component {
 								</span>
 								<span className='org-details flex'>
 									<p className='org-text-label'>Created by: </p>
-									<p className='org-text-data'> {this.state.org.creator.name}</p>
+									{/* <p className='org-text-data'> {this.state.org.creator.name}</p> */}
 								</span>
 							</div>
 							</>
@@ -63,12 +68,14 @@ class OrgDetails extends React.Component {
 						}
 					</div>
 				</section>
+				<OrgFeed />
+				<Footer />
 			</>
 		)
 	}
 }
 
-export default OrgDetails;
+// export default OrgDetails;
 
 // const mapStateToProps = (state) => {
 // 	return {
@@ -76,4 +83,4 @@ export default OrgDetails;
 // 	}
 // }
 
-// export default connect(mapStateToProps)(OrgDetails);
+export default connect()(OrgDetails);

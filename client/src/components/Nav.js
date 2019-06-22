@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Nav extends React.Component {
 
   handleClick = (e) => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     window.location.reload(); 
     <Redirect to="/" />
   }
@@ -13,18 +13,20 @@ class Nav extends React.Component {
 
   render () {
     const { token } = this.props;
+    const { username } = this.props;
     // console.log(this.props.token, 'checking token');
     if(token !== 'undefined' && token){
       return (
         <div>
           <ul className="navbar">
             <li className='navbar-start'>
-              <p className='logo-name'>altify</p>
+              <Link to="/" ><p className='logo-name'>altify</p></Link>
             </li>
-            <li>
-              {/* {this.props.userData} */}
+            <li className='navbar-end'>
+              <Link to="/posts" ><p className='nav-username nav-posts'>Posts</p></Link>
+              <p className='nav-username'>Hello! {username}</p>
+              <button className="button log-out-button" onClick={this.handleClick}>logout</button>
             </li>
-            <button className="button navbar-end log-out-button" onClick={this.handleClick}>logout</button>
           </ul>
         </div>
     )
@@ -46,7 +48,7 @@ class Nav extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token : state.token,
-    userData: state.userData
+    username: state.name,
   }
 }
 

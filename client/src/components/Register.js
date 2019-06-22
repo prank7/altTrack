@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, withRouter } from "react-router-dom";
+var queryString = require('query-string');
 import { connect } from 'react-redux';
+import { Link, withRouter } from "react-router-dom";
 import { registerAction } from '../store/actions/Action';
 import Nav from './Nav';
-var queryString = require('query-string');
 
 
 class Register extends React.Component {
@@ -51,7 +51,7 @@ class Register extends React.Component {
 	render() {
 		return(
 			<>
-				<div className="register columns is-desktop is-vcentered">
+				<div className="register columns is-desktop is-vcentered home-bg-split-right">
 					<div className="column home-bg-split-left parent">
 						{/* <Nav/> */}
 						<div className='child'>
