@@ -55,7 +55,7 @@ class Login extends React.Component {
 							<div className="field">
 								<label className='label'>email</label>
 								<p className="control has-icons-left has-icons-right">
-									<input className='input' value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='email' autoComplete='email'/>
+									<input className='input' value={this.state.email} onChange={(e) => this.handleChange(e)} name='email' type='email' placeholder='e.g alexsmith@gmail.com' autoComplete='email'/>
 									<span className="icon is-small is-left">
 										<i className="fas fa-envelope"></i>
 									</span>
@@ -67,7 +67,7 @@ class Login extends React.Component {
 								
 							<div className="field">
 								<label className='label' >password</label>
-								<input className='input' value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' placeholder='password' autoComplete='current-password' />
+								<input className='input' value={this.state.password} onChange={(e) => this.handleChange(e)} name='password' type='password' autoComplete='current-password' />
 							</div>
 							{
 								this.state.email && this.state.password ? 

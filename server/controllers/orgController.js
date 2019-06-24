@@ -130,48 +130,33 @@ exports.sendInvites = (req, res, next) => {
 exports.getOrgPosts = (req, res) => {
 	var orgId = req.params.id;
 	var userId = req.headers.userId;
-	Teammate.find({}, (err, allTeammates) => {
+	console.log(orgId, userId);
+	console.log('req coming in getOrgPosts');
+	Post.find({org: orgId}, null, {sort: {createdAt: -1}})
+	.populate('user')
+	.exec((err, orgPosts) => {
 		if(err) return res.status(500).json({
 			success: false,
-			err,
+			err
 		})
-		var extractedPosts = [];
-		allTeammates.forEach(teammate => {
-			User.findOne({email: teammate.teammateEmail}).populate('posts').exec((err, orgPosts) => {
-				if(err) return res.status(500).json({
-					success: false,
-					err,
-				})
-				console.log(orgPosts, 'this is orgPOSTS......');
-				orgPosts.posts.forEach(elm => {
-					extractedPosts.push(elm);
-					
-				})
-				console.log(extractedPosts.length, 'this IS LENGTHHHHHHHH')
-			})
+		if(orgPosts) return res.status(200).json({
+			success: true,
+			orgId: orgId,
+			orgPosts
 		})
-		console.log(extractedPosts, 'THIS IS EXTRACTED POSTS');
-
-		// if(extractedPosts.length) return res.status(200).json({
-		// 	success: true,
-		// 	extractedPosts,
-		// })
-		res.json({success: true, posts: extractedPosts});
 	})
-
-
-
-
 
 	// Post.find({org: orgId}, (err, orgPosts) => {
 	// 	if(err) return res.status(500).json({
 	// 		success: false,
-	// 		err,
+	// 		err
 	// 	})
-	// 	console.log(orgPosts, 'this is OrgPosts ......');
 	// 	if(orgPosts) return res.status(200).json({
 	// 		success: true,
+	// 		orgId: orgId,
 	// 		orgPosts
 	// 	})
 	// })
+
 }
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -23,7 +23,6 @@ class Nav extends React.Component {
               <Link to="/" ><p className='logo-name'>altify</p></Link>
             </li>
             <li className='navbar-end'>
-              <Link to="/posts" ><p className='nav-username nav-posts'>Posts</p></Link>
               <p className='nav-username'>Hello! {username}</p>
               <button className="button log-out-button" onClick={this.handleClick}>logout</button>
             </li>

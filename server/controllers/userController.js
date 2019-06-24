@@ -97,11 +97,14 @@ exports.verifyToken = (req, res, next) => {
 }
 
 exports.savePosts = (req, res) => {
+	console.log(req.body);
 	//Saving info on new variable to save in DB. The keys matches with Keys in Schema.
 	var newPost = {
 		didToday: req.body.didToday,
 		learnedToday: req.body.learnedToday,
 		user: req.headers.user.userId,
+		org: req.body.orgId,
+		tag: req.body.tag,
 	}
 
 	Post.create(newPost, (err, post) => {
@@ -114,8 +117,6 @@ exports.savePosts = (req, res) => {
 		if(post) {
 			User.findOneAndUpdate({_id: req.headers.user.userId}, {$push: {posts: post._id}})
 			.exec((err, updatedUser) => {
-				// console.log(updatedUser, 'thisis updatedUser');
-
 				if(err) return res.status(500).json(err);
 				if(updatedUser) return res.status(200).json({
 					success: true,

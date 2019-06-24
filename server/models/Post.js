@@ -11,12 +11,18 @@ var postSchema = new Schema({
 		type: String,
 		maxlength: 140,
 		required: true,
-
 	},
 	user: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 	},
+	org: {
+		type: Schema.Types.ObjectId,
+		ref: 'Org',
+	},
+	tag: {
+		type: String,
+	}
 }, {timestamps: true})
 
 var Post = mongoose.model('Post', postSchema);

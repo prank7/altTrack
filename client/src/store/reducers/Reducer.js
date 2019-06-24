@@ -41,13 +41,13 @@ export default function rootReducer(state = initState,action) {
         posts: action.payload,
       }
     }
-    case "GET_USER_POSTS": {
-      // console.log(state, action,'request coming in Reducer GET USER POSTS');
-      return {
-        ...state,
-        userPosts: action.payload.userPosts,
-      }
-    }
+    // case "GET_USER_POSTS": {
+    //   // console.log(state, action,'request coming in Reducer GET USER POSTS');
+    //   return {
+    //     ...state,
+    //     userPosts: action.payload.userPosts,
+    //   }
+    // }
     // case "GET_ORG_ID": {
     //   return {
     //     ...state,
@@ -58,7 +58,8 @@ export default function rootReducer(state = initState,action) {
       console.log(state, 'this is state', action, 'this is action');
       return {
         ...state,
-        orgFeed: action.payload
+        orgFeed: action.payload.orgPosts,
+        orgId: action.payload.orgId,
       }
     }
   default:

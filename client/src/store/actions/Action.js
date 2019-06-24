@@ -83,20 +83,20 @@ export function savePostsAction(data) {
 	}
 }
 
-export function getUserPosts() {
-	return dispatch => {
-		// console.log('this is before fetch user posts');
-		fetch(`http://localhost:8000/api/v1/users/${userId}/posts`)
-		.then(res => res.json())
-		.then(data => {
-			// console.log(data, 'thisdispatched in getUserPosts');
-			dispatch({
-				type: "GET_USER_POSTS",
-				payload: data
-			})
-		})
-	}
-}
+// export function getUserPosts() {
+// 	return dispatch => {
+// 		// console.log('this is before fetch user posts');
+// 		fetch(`http://localhost:8000/api/v1/users/${userId}/posts`)
+// 		.then(res => res.json())
+// 		.then(data => {
+// 			// console.log(data, 'thisdispatched in getUserPosts');
+// 			dispatch({
+// 				type: "GET_USER_POSTS",
+// 				payload: data
+// 			})
+// 		})
+// 	}
+// }
 
 //get all Posts from an Organization
 export function getOrgFeed(orgId) {
@@ -112,7 +112,7 @@ export function getOrgFeed(orgId) {
 			}})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data, 'this is data before dispatch');
+			console.log(data, 'this is data before dispatch in getOrgFeed');
 			dispatch({
 				type: "GET_ORG_FEED",
 				payload: data
