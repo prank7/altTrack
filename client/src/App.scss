@@ -104,42 +104,60 @@
 
 //Org Details page
 .notification-text {
+	background-color: #fff;
 	color: #F4494B;
-	margin-left: 10px;
+	text-align: center;
+}
+
+.org-details-wrapper {
+	max-width: 1100px;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid;
+	padding: 10px;
+}
+
+.org-details-section {
+	display: grid;
+	grid-template-columns: 300px auto;
+	grid-column-gap: 10px;
 }
 
 .org-details {
-	h3 {
-		padding: 10px;
+
+	padding: 10px;
+	border: 0.5px solid blue;
+
+	.org-details-sub-container {
+
+		.org-name {
+			text-transform: capitalize;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.org-text-label {
+			color: rgb(187, 184, 184);
+			margin-right: 10px;
+		}
 	}
+	
 }
 
-.org-details-sub-container {
-	span {
-		padding: 10px;
-	}
 
-	.org-text-label {
-		color: rgb(184, 182, 182);
-	}
 
-	.org-text-data {
-		margin-left: 10px;
-	}
-}
-
-.teammates-list-heading {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 10px;
-}
 
 .org-details-heading {
 	font-size: 16px;
 	font-weight: bold;
 }
 
+
 //Teammate page Styles
+.teammates-list-heading {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 10px;
+}
 
 .teammate-page-left {
 	margin: 10px;
@@ -169,16 +187,67 @@
 
 //Post Component Styles
 
+.feed-container {
+	display: grid;
+	grid-template-rows: auto;
+	grid-row-gap: 3px;
+
+	.post-inputs {
+		width: 100%;
+		padding: 10px 30px 10px 30px;;
+		background-color: #FFF0E8;
+		
+		.post-input-box {
+			background-color: #fff;
+			border: 1px solid #FFD9C7;
+			border-radius: 10px;
+			padding: 0;
+			position: relative;
+
+			small {
+				font-size: 12px;
+				color: rgb(141, 141, 141);
+				position: absolute;
+				bottom: 0;
+				right: 5px;
+			}
+	
+			textarea {
+				border-radius: 10px;
+				font-size: 16px;
+				width: 100%;
+				resize: none;
+				outline: none;
+				border: none;
+				padding: 5px;
+			}
+		}
+		
+	}
+
+	.input-radio-buttons {
+		background-color: #FFF0E8;
+		padding: 5px 30px 5px 20px;
+		text-align: center;
+		display: flex;
+		justify-content: space-between;
+
+		span {
+
+			margin: 10px;
+			input {
+				margin: 5px;
+			}
+		}
+
+	}
+}
+
 body {
 	background-color: #e6ecf0;
 }
 
-.post-inputs {
-	textarea {
-		width: 100%;
-		height: 60px;
-	}
-}
+
 
 .post {
 	background-color: #fff;

@@ -32,48 +32,47 @@ class OrgDetails extends React.Component {
 		return (
 			<>
 				<Nav />
-				<section className='columns'>
-					<div className='column is-half org-details'>
-						<h3 className="is-4 is-spaced org-details-heading">Organization Details</h3>
-						{
-						this.state.org ? (
-							<>
-							<div className='org-details-sub-container'>
-								<span className='org-details flex'>
-									<p className='org-text-label'>Name: </p>
-									<p className='org-text-data'> {this.state.org.name}</p>
-								</span>
-								<span className='org-details flex'>
-									<p className='org-text-label'>Location: </p>
-									<p className='org-text-data'> {this.state.org.location}</p>
-								</span>
-								<span className='org-details flex'>
-									<p className='org-text-label'>Created by: </p>
-									{/* <p className='org-text-data'> {this.state.org.creator.name}</p> */}
-								</span>
-							</div>
-							</>
-						) : null
-						}
+				<section className='org-details-wrapper'>
+					<div className="org-details-section">
+						<div className='org-details'>
+							{
+							this.state.org ? (
+								<>
+								<div className='org-details-sub-container'>
+									<span className=' flex'>
+										<p className='org-name'> {this.state.org.name}</p>
+									</span>
+									<span className=' flex'>
+										<p className='org-text-label'>Location: </p>
+										<p className='org-text-data'> {this.state.org.location}</p>
+									</span>
+									<span className=' flex'>
+										<p className='org-text-label'>Created by: </p>
+										{/* <p className='org-text-data'> {this.state.org.creator.name}</p> */}
+									</span>
+								</div>
+								</>
+							) : null
+							}
 
-						<Teammate data={this.state.org}/>
-					</div>
-					{/* <div className='column is-half'>
-						<p className='teammates-list-heading'>Teammates</p>
-						{
-							this.state.teammate.length === 0  ? <p>No teammates added yet!</p> : null
-						}
-						{
-							this.state.teammate && this.state.teammate.map(teammate => 
-										<p>{teammate.teammateEmail}</p>)	
-						}
-					</div> */}
-					<div className='column is-half'>
-						<Posts data={this.state.org}/>
+							<Teammate data={this.state.org}/>
+						</div>
+						{/* <div className='is-half'>
+							<p className='teammates-list-heading'>Teammates</p>
+							{
+								this.state.teammate.length === 0  ? <p>No teammates added yet!</p> : null
+							}
+							{
+								this.state.teammate && this.state.teammate.map(teammate => 
+											<p>{teammate.teammateEmail}</p>)	
+							}
+						</div> */}
+						<div className='feed-container'>
+							<Posts data={this.state.org}/>
+							<OrgFeed />
+						</div>
 					</div>
 				</section>
-				{/* SEND state.org as props to OrgFeed Component as well so that the OrgFeed can be fetched for respective ORgs. */}
-					<OrgFeed />
 				<Footer />
 			</>
 		)
