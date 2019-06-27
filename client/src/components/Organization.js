@@ -6,6 +6,7 @@ import { getOrgList } from '../store/actions/Action';
 
  class Organization extends Component {
   constructor(props) {
+    // console.log('constructor');
     super(props);
     this.state = {
       selectedFile: null,
@@ -16,8 +17,13 @@ import { getOrgList } from '../store/actions/Action';
   }
   
   componentDidMount = () => {
+    // console.log('didMount');
     this.props.dispatch(getOrgList());
   }
+
+  // componentDidUpdate = () => {
+  //   console.log('didUpdate');
+  // }
   
   onChangeHandler = (e) => {
     this.setState({
@@ -54,6 +60,11 @@ import { getOrgList } from '../store/actions/Action';
     }
     }).then(data => {
       // console.log(data, 'this is freaking data coming after Axios POST request');
+      this.setState({
+        selectedFile: null,
+        orgName: '',
+        location: '',
+      })
       this.props.dispatch({
         type: 'ORGANIZATIONS',
         payload: data
@@ -64,18 +75,18 @@ import { getOrgList } from '../store/actions/Action';
   render() {
     return (
     <>
-      <div className="columns">
-        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="column is-half">
-          <div className='column is-6'>
-            <div className="five wide field">
+      <div className="landing-container">
+        <form onSubmit={this.onClickHandler} encType="multipart/form-data" className="landing-form ">
+          <div className='form-container'>
+            <div className="fiv">
               <label className='label'>Create Organization</label>
               <input className='input' type="text" value={this.state.orgName} onChange={this.changeOrgName} placeholder='org name'/>
             </div>
-            <div className="five wide field">
+            <div className="fiv">
               {/* <label className='label'>location</label> */}
               <input className='input' type="text" value={this.state.location} onChange={this.handleLocation} placeholder='location' />
             </div>
-            <div className="five wide field">
+            <div className="fiv">
               <label className='label'>upload image</label>
               <input className='input' name="file" onChange={this.onChangeHandler}  type="file"/>
             </div>
@@ -85,7 +96,7 @@ import { getOrgList } from '../store/actions/Action';
             }
           </div>
         </form>
-        <div className='column is-half'>
+        <div className='organization-list'>
           <OrganizationList/>
         </div>
       </div>

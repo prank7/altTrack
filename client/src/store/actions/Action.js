@@ -74,7 +74,7 @@ export function savePostsAction(data) {
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data.success, 'thisisdataDATA');
+			console.log(data, 'thisisdataDATA');
 			dispatch({
 				type: "SAVE_POSTS",
 				payload: data

@@ -5,11 +5,6 @@ var Teammate = require('../models/Teammate');
 
 var userController = require('../controllers/userController');
 
-//render register page
-router.get('/register', (req, res) => {
-	res.render('index');
-});
-
 router.get('/register/verify/:id', (req, res) => {
 	Teammate.findOne({refCode: req.params.id})
 	.exec()
@@ -23,21 +18,6 @@ router.get('/register/verify/:id', (req, res) => {
 			foundTeammate
 		});
 	});
-});
-
-//render login page
-router.get('/login', (req, res) => {
-	res.render('index');
-});
-
-//get org page
-router.get('/org', (req, res) => {
-	res.render('index');
-});
-
-//render teammate invite box
-router.get('/org/invite', (req, res) => {
-	res.render('index');
 });
 
 //gets list of all existing oranizations

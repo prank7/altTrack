@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from './Nav';
 import {connect} from 'react-redux';
-import {savePostsAction, getUserPosts} from './../store/actions/Action';
+import {savePostsAction, getOrgFeed} from './../store/actions/Action';
 
 //For POST success notification message
 var isPostSuccess = false;
@@ -58,8 +58,8 @@ class Posts extends React.Component {
 					tag: '',
 				})
 				isPostSuccess = !isPostSuccess;
+				this.props.dispatch(getOrgFeed(this.props.orgId));
 			}
-		// this.props.dispatch(getUserPosts());
 	}
 
 	render() {
@@ -138,7 +138,8 @@ class Posts extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		posts: state.userPosts
+		posts: state.userPosts,
+		orgId: state.orgId
 	}
 }
 

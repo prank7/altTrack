@@ -1,9 +1,6 @@
 import React from 'react';
 import Nav from './Nav';
 import Footer from './Footer';
-import OrgDetails from './OrgDetails';
-import OrgFeed from './OrgFeed';
-import OrganizationList from './OrganizationList';
 import Organization from './Organization';
 
 class Landing extends React.Component {
@@ -12,10 +9,7 @@ class Landing extends React.Component {
 			<>
 				<Nav />
 				<Organization />
-				{/* <OrganizationList />
-				<OrgFeed /> */}
 				<Footer />
-
 			</>
 		)
 	}

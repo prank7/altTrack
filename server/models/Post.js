@@ -4,12 +4,12 @@ var Schema = mongoose.Schema;
 var postSchema = new Schema({
 	didToday: {
 		type: String,
-		maxlength: 140,
+		maxlength: 180,
 		required: true,
 	},
 	learnedToday: {
 		type: String,
-		maxlength: 140,
+		maxlength: 180,
 		required: true,
 	},
 	user: {

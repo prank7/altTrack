@@ -55,7 +55,7 @@ export default function rootReducer(state = initState,action) {
     //   }
     // }
     case "GET_ORG_FEED": {
-      console.log(state, 'this is state', action, 'this is action');
+      // console.log(state, 'this is state', action, 'this is action');
       return {
         ...state,
         orgFeed: action.payload.orgPosts,

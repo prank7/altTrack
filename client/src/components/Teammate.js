@@ -45,15 +45,11 @@ class Teammate extends React.Component {
 	render() {
 		return (
 			<>
-				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="columns">
-					<div className="column is-half teammate-page-left">
+				<form onSubmit={this.onClickHandler} encType="multipart/form-data" className="">
+					<div className="teammate-page-left">
 						<div className='flex invite-input'>
-							<input className='input ' value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Add a teammate' />
-							{
-								this.state.teammateEmail ? 
-								<input className='button bg-primary' type='submit' value='Invite' /> : null
-							}
-							
+							<input className='input ' value={this.state.teammateEmail} onChange={this.updateEmail} type='email' placeholder='Invite a member' />
+							<input className='button bg-primary' type='submit' value='Invite' />
 						</div>
 					</div>
 				</form>

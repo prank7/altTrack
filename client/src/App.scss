@@ -1,3 +1,6 @@
+body {
+	background-color: #e6ecf0;
+}
 
 //Homepage styles
 
@@ -22,21 +25,20 @@
 }
 
 .home-text-right {
-	font-size: 24px;
-	margin: 15px;
+	font-size: 30px;
+	margin-bottom: 25px;
 }
 
 .home-text-left {
 	font-size: 20px;
 	color: #fff;
 	font-weight: 500;
-	margin-left: 10px;
+	margin: 25px;
 }
 
 .home-icons {
 	font-size: 28px;
 	color: #fff;
-	margin: 8px;
 }
 
 .join {
@@ -56,7 +58,6 @@
 
 //Register Form Styles
 
-
 .register-login-text {
 	font-size: 14px;
 	margin-left: 10px;
@@ -67,9 +68,7 @@
 	margin-left: 10px;
 }
 
-
-//Landing Styles
-
+//Navbar Logo Styles
 .logo-name {
 	font-size: 28px;
 	font-weight: bold;
@@ -77,10 +76,49 @@
 	color: #fff;
 }
 
+
+//Landing Styles
+
+.landing-container {
+	background-color: #e6ecf0;
+	max-width: 900px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	padding: 100px;
+	
+	
+	
+	.landing-form {
+		max-width: 400px;
+		width: 80%;
+		display: grid;
+		place-content: center;
+		padding: 25px;
+		border: 1px solid;
+		background-color: #fff;
+
+		.form-container {
+			max-width: 300px;
+			width: 100%;
+		}
+	}
+}
+
 //Organization List Styles
+
+.organization-list {
+	background-color: #fff;
+	max-width: 300px;
+	width: 80%;
+	
+
+}
 
 .org-list-container {
 	padding: 10px;
+
 	h3 {
 		font-size: 16px;
 		font-weight: bold;
@@ -91,6 +129,7 @@
 		margin-top: 20px;
 		
 		.icard-image {
+			
 			.fa-users {
 				font-size: 20px;
 			}
@@ -110,7 +149,7 @@
 }
 
 .org-details-wrapper {
-	max-width: 1100px;
+	max-width: 1000px;
 	width: 100%;
 	margin: 0 auto;
 	border: 1px solid;
@@ -121,17 +160,20 @@
 	display: grid;
 	grid-template-columns: 300px auto;
 	grid-column-gap: 10px;
+	background-color: #e6ecf0;
+	align-items: start;
 }
 
 .org-details {
-
-	padding: 10px;
-	border: 0.5px solid blue;
-
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: start;
+	
+	
 	.org-details-sub-container {
-
+		padding: 10px;
+		background-color: #fff;
 		.org-name {
-			text-transform: capitalize;
 			font-size: 24px;
 			font-weight: bold;
 		}
@@ -142,10 +184,6 @@
 	}
 	
 }
-
-
-
-
 .org-details-heading {
 	font-size: 16px;
 	font-weight: bold;
@@ -153,6 +191,10 @@
 
 
 //Teammate page Styles
+
+.teammate-list-container {
+	
+}
 .teammates-list-heading {
 	font-size: 16px;
 	font-weight: bold;
@@ -164,14 +206,13 @@
 }
 
 //nav bar styles
-
 .navbar {
 	// vertical-align: baseline !important;
 	background-color: #F4494B !important;
 
 	.nav-username {
 		color: #fff;
-		margin: 10px;
+		margin: 14px;
 	}
 
 	.nav-posts {
@@ -179,10 +220,16 @@
 	}
 }
 
-
-
 .log-out-button {
-	margin: 5px;
+	margin: 10px;
+	text-decoration: none;
+	color: #fff;
+	font-size: 22px;
+}
+
+.log-out-button:hover {
+	text-decoration: none;
+	color: #fff;
 }
 
 //Post Component Styles
@@ -239,38 +286,8 @@
 				margin: 5px;
 			}
 		}
-
 	}
 }
-
-body {
-	background-color: #e6ecf0;
-}
-
-
-
-.post {
-	background-color: #fff;
-	border-bottom: 0.5px solid lightgray;
-	padding: 5px 8px;
-
-	.post-time {
-		display: flex;
-		justify-content: flex-end;
-		color: rgb(180, 183, 184);
-		font-size: 12px;
-
-		p {
-			margin: 2px;
-		}
-	}
-
-	
-}
-
-
-
-
 
 //footer styles
 
@@ -292,6 +309,71 @@ body {
 			font-size: 18px;
 			margin: 10px;
 			color: #F4494B;
+		}
+	}
+}
+
+// Org Feed Styles
+
+.org-feed-section {
+	display: grid;
+	grid-template-rows: auto;
+	grid-row-gap: 1px;
+
+	.org-feed-posts {
+		padding: 10px;
+		background-color: #fff;
+		
+		.post-container {
+			padding: 10px;
+			
+			.post {
+			// sdlkjsljsf
+				.post-head {
+					display: flex;
+					justify-content: space-between;
+
+					span {
+						display: flex;
+						
+					}
+
+					.fa-user-circle {
+						font-size: 40px;
+						color: lightgray;
+						
+					}
+					.post-username {
+						margin-left: 10px;
+						text-transform: capitalize;
+						font-weight: bold;
+					}
+					.post-time {
+						display: flex;
+						justify-content: flex-end;
+
+						p {
+							margin-left: 5px;
+							font-size: 14px;
+						}
+					}
+				}
+				.post-text {
+					font-size: 14px;
+					
+					padding-left: 45px;
+					color: #14171a;
+
+					.post-text-one {
+						
+					}
+
+					a {
+						margin-left: 10px;
+						font-size: 14px;
+					}
+				}
+			}
 		}
 	}
 }

@@ -12,37 +12,38 @@ class OrgFeed extends React.Component {
 	// }
 	
 	render() {
-		
-		// const {orgId} = this.props;
-		// const dete = orgId && orgId.data !== null ? orgId.data : null;
-		
 		return (
 			<>
-				<section className='columns is-centered'>
-					<div className='column is-4'>
-						<div className='post-container'>
-							{
-								this.props.orgPosts.map(post => {
-									return (
-										<div className='post'>
-											<p>{post.user.name}</p>
-											<div className='post-time'>
-												<p>{new Date(post.createdAt).toLocaleTimeString()}</p>
-												<p>on {new Date(post.createdAt).toDateString()}</p>
-											</div>
-											
-											<p></p>
-											<p>{post.didToday}</p>
-											<p>{post.learnedToday}</p>
-
-
-											<button className="button" >{post.tag}</button>
+				<section className='org-feed-section'>
+					{
+						this.props.orgPosts && this.props.orgPosts.map(post => {
+							return (
+						<div className='org-feed-posts'>
+							<div className='post-container'>
+								<div className='post'>
+									<div className='post-head'>
+										<span>
+											<i class="fas fa-user-circle"></i>
+											<p className='post-username'>{post.user.name}</p>
+										</span>
+										<div className='post-time'>
+											<p>{new Date(post.createdAt).toLocaleTimeString()}</p>
+											<p>{new Date(post.createdAt).toLocaleDateString()}</p>
 										</div>
-									)
-								})	
-							}	
+									</div>
+									<div className='post-text'>
+										<p className='post-text-one'>{post.didToday}</p>
+										<p className='post-text-two'>
+											{post.learnedToday}
+											<a className="tag" >#{post.tag}</a>
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+							)
+						})	
+					}	
 				</section>
 
 			</>
