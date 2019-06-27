@@ -10,8 +10,12 @@ import rootReducer from './store/reducers/Reducer';
 
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
 
-const store = createStore(rootReducer,composeEnchancers(applyMiddleware(thunk)));
+// TODO: Learn about createStore in redux.
+const store = createStore(rootReducer, composeEnchancers(applyMiddleware(thunk)));
 
-ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById('root'));
+ReactDOM.render(
+	<Provider store={store}> <App /> </Provider>,
+	document.getElementById('root')
+);
 
 serviceWorker.unregister();

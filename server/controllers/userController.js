@@ -42,11 +42,13 @@ exports.loginUser = (req, res, next) => {
 
 exports.registerUser = (req, res) => {
 	// console.log(req.body, 'this is req body in registerUser');
+
+	// TODO: Validation. for email Id, name, password: should be atleast 6 characters.
+
 	User.findOne({email: req.body.email})
-	.exec()
 	.then(user => {
 		if(user) {
-			return res.status(409).json({
+			return res.status(403).json({
 				success : false,
 				message: 'Email already exists! please try with a different email.'
 			});
@@ -58,10 +60,13 @@ exports.registerUser = (req, res) => {
 			}
 			User.create(newUser, (err, user) => {
 				// console.log(user, 'this is registered user');
-				if(err) return res.status(500).json({
-					success: false,
-					message: 'Server Error'
-				})
+				if(err) {
+					return res.status(500).json({
+						success: false,
+						message: 'Server Error'
+					})
+				} 
+				
 				if(user && req.body.isInvited) {
 					Teammate.findOneAndUpdate({teammateEmail: req.body.email}, {isVerified: req.body.isInvited}, (err, updatedTeammate) => {
 						if(err) return res.status(500).json({
